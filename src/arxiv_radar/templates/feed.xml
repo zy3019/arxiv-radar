@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ title }}</title>
+  <id>{{ site_url or "urn:arxiv-radar" }}/</id>
+  {% if site_url %}
+  <link href="{{ site_url }}/"/>
+  <link rel="self" href="{{ site_url }}/feed.xml"/>
+  {% endif %}
+  <updated>{{ updated.isoformat() }}T00:00:00Z</updated>
+  <author><name>arXiv Radar</name></author>
+  {% for date, entry in entries %}
+  <entry>
+    <title>{{ entry.review.title_translated if entry.review else entry.paper.title }}</title>
+    <id>{{ entry.paper.url }}</id>
+    <link href="{{ entry.paper.url }}"/>
+    <updated>{{ date.isoformat() }}T00:00:00Z</updated>
+    <summary>{{ entry.review.tldr if entry.review else entry.paper.abstract }}</summary>
+  </entry>
+  {% endfor %}
+</feed>

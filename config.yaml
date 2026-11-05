@@ -1,0 +1,54 @@
+# arXiv Radar configuration. After forking, edit the first three settings.
+
+# arXiv categories to watch: https://arxiv.org/category_taxonomy
+categories:
+  - cs.CL
+  - cs.LG
+  - cs.AI
+
+# Your interests in plain language, in any language. The LLM scores papers against this.
+interests: |
+  我关注大语言模型的应用工程：检索增强生成（RAG）、Agent 的工具调用与规划、
+  长上下文，以及如何评测这些系统。偏好有开源代码、能落地的工作；
+  对纯理论推导和与语言无关的计算机视觉论文不感兴趣。
+
+# English keywords for the free first-pass ranking. arXiv abstracts are in English.
+keywords:
+  - retrieval-augmented generation
+  - RAG
+  - LLM agents
+  - tool use
+  - planning
+  - long context
+  - evaluation
+  - benchmark
+
+# Papers containing any of these are dropped before the LLM sees them.
+exclude_keywords: []
+
+# Output language for summaries and page labels: zh or en.
+language: zh
+
+# How far back to look. arXiv takes up to about 3.5 days to announce a paper over a
+# weekend, so keep this at 5 or more. Papers already processed are never repeated.
+lookback_days: 5
+max_fetch: 3000       # upper limit on papers fetched per run (these three categories
+                      # had about 1,700 papers in 5 days in November 2026)
+
+max_candidates: 30    # papers sent to the LLM per run; this drives the API cost
+max_papers: 15        # papers shown per digest
+min_score: 6          # lowest LLM score (1-10) that makes the digest
+
+llm:
+  # claude-haiku-5-5 costs roughly 1/40 as much per token as the default.
+  model: claude-opus-5-5
+  effort: low
+  max_tokens: 8000
+  concurrency: 4
+  # When Claude declines a paper, retry it on a fallback model inside the same call.
+  # Turn this off if ANTHROPIC_BASE_URL points at a gateway that rejects the parameter.
+  refusal_fallback: true
+
+site_title: arXiv 论文雷达
+data_dir: data
+site_dir: site
