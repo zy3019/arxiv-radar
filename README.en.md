@@ -6,6 +6,10 @@ Every day, arXiv Radar picks the dozen or so new papers closest to your research
 
 Fork it, edit one config file, and it runs on GitHub Actions. You don't need a server. It uses DeepSeek by default, which costs about 3 CNY (well under $1) a month.
 
+**Live example:** https://zy3019.github.io/arxiv-radar/ (in Chinese; set `language: en` for English output)
+
+![A daily page: each paper has a relevance score, translated title, one-line summary, method, findings and the reason it was picked](docs/screenshot.png)
+
 ## How it works
 
 ```mermaid

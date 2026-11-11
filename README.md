@@ -6,6 +6,10 @@
 
 Fork 后改一份配置就能用。它运行在 GitHub Actions 上，不需要服务器。默认使用 DeepSeek，每月花费大约 3 元。
 
+**在线示例：** https://zy3019.github.io/arxiv-radar/
+
+![每日页面：每篇论文有相关度评分、中文标题、一句话总结、方法、结果和推荐理由](docs/screenshot.png)
+
 ## 工作流程
 
 ```mermaid
