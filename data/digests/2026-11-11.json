@@ -1,7 +1,7 @@
 {
   "date": "2026-11-11",
-  "fetched": 1451,
-  "matched": 1126,
+  "fetched": 1555,
+  "matched": 1206,
   "entries": [
     {
       "paper": {
@@ -266,6 +266,44 @@
     },
     {
       "paper": {
+        "id": "2611.14326",
+        "title": "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
+        "abstract": "LLM agents increasingly operate in long-horizon, verifier-rich environments, but current self-improvement mechanisms often write episode-derived lessons directly into memory, making local success an unreliable signal for reusable and safe knowledge. This paper addresses the core question of when an experience-derived behavioral update should be admitted into persistent agent state. We propose Falsification-Gated Self-Evolution (FGSE), a verifier-grounded framework that represents each candidate lesson as a structured hypothesis with an explicit precondition, behavior change, expected effect, and verifier. FGSE applies the hypothesis only in a temporary state, tests it on target-transfer, falsification, and archived-regression probes, and then commits, refines, or rejects it according to measured gain and risk. Across web, app, tool-use, and long-term memory benchmarks, FGSE achieves strong task performance, including 39.8 WebArena success rate, 78.8 AppWorld average completion, and 0.724/0.487 Pass$^1$ on $τ$-Retail/$τ$-Airline, while reducing falsification failures to 5.0%, regression damage to 1.3%, and harmful committed updates to 3.6%. These results suggest that testing memory updates as hypotheses supports more reliable long-term adaptation.",
+        "authors": [
+          "Runxuan Tang",
+          "Haoyu Gao",
+          "Yuyan Ding",
+          "Junyi Yao",
+          "Zihao Zheng",
+          "Zecheng Sheng",
+          "Liwei Hou"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.LG"
+        ],
+        "published": "2026-11-10T16:52:25Z",
+        "url": "https://arxiv.org/abs/2611.14326",
+        "pdf_url": "https://arxiv.org/pdf/2611.14326"
+      },
+      "lexical_score": 21.632,
+      "review": {
+        "score": 8,
+        "title_translated": "智能体何时应该记忆？面向 LLM Agent 的证伪门控自我进化",
+        "tldr": "提出 FGSE 框架，把 Agent 从经验中得到的行为更新当作可证伪的假设，先临时试用并通过验证器检验后再决定写入长期记忆，从而提升长期适应的可靠性。",
+        "method": "将每条候选经验表示成包含前置条件、行为变化、预期效果和验证器的结构化假设，先在临时状态下应用，经目标迁移、证伪和归档回归探针测试后，依据实测增益与风险决定提交、修正还是拒绝。",
+        "findings": "在 web、app、工具使用和长期记忆基准上取得 39.8 的 WebArena 成功率、78.8 的 AppWorld 平均完成度、τ-Retail/τ-Airline 上 0.724/0.487 的 Pass^1，同时将证伪失败降至 5.0%、回归损害降至 1.3%、有害提交更新降至 3.6%。",
+        "why_relevant": "直接对应研究者关注的 Agent 记忆/自我进化与系统评测，且给出了带验证器的可落地框架和多基准量化结果。",
+        "tags": [
+          "Agent 记忆",
+          "自我进化",
+          "工具调用",
+          "Agent 评测"
+        ]
+      }
+    },
+    {
+      "paper": {
         "id": "2611.09807",
         "title": "Compaction, decay and reinforcement in a two-tier conversational memory: a paired evaluation against retrieval-augmented generation",
         "abstract": "A conversational agent that remembers has to decide what to keep. Retrieval-augmented generation keeps the transcript and searches it; the alternative is to compact each turn into atomic facts and search those. We compare the two on LoCoMo, with both arms answering all 1,985 questions in one window, against the same stores, with the same generator and judge, and both predictions on one row, which licenses McNemar's exact test on the 512 questions where they disagree. On the four categories comparable work reports, compaction scores 71.4 per cent against 64.6, a lead of 6.8 points (p = 5.5e-08) at 34 per cent fewer prompt tokens. On all five, including the adversarial set comparable work drops, the lead falls to 2.0 and stops being significant, because the baseline leads adversarial by 14.6. That loss has a structure. Our lead falls as the reference answer demands more source wording, 9.6 points ahead at one or two reference words and 3.1 behind past eight, with token overlap moving the same way, so the judge is not the cause. Compaction keeps what a fact asserts and discards how it was said, so it wins where the answer is a value and loses where it is a phrasing. We also report four negative results with their power calculations.",
@@ -409,138 +447,134 @@
     },
     {
       "paper": {
-        "id": "2611.13966",
-        "title": "Controlled Knowledge Engineering for Taxonomy Induction with Tool-Grounded LLM Agents and Runtime-Adaptive Policies",
-        "abstract": "Taxonomies are structured knowledge representations that support semantic search, recommendation, product catalog organization, and retrieval-augmented generation. Their automated construction from a fixed set of candidate entities requires more than plausible text generation: the resulting hierarchy must be complete, structurally valid, and semantically coherent. Large Language Models (LLMs) are promising for this task, but iterative free-form generation remains vulnerable to omitted or hallucinated entities, invalid hierarchical relations, and inconsistent organizational principles. We introduce TIGA (Taxonomy Induction with Tool-Grounded Agents), a knowledge-engineering architecture that formulates taxonomy induction as an iterative decision process over an explicit state and constrained action space. TIGA combines executable taxonomy-editing tools, an memory that records tool calls, rationales, and outcomes, and a runtime-adaptive organizational policy that the agent revises during inference. An optional global reviewer evaluates the constructed taxonomy against the candidate set and the active policy. We evaluate TIGA on four benchmark taxonomies using two LLM backbones and compare it with single-shot and iterative prompting-based baselines. TIGA achieves the strongest structural-quality results in most evaluated configurations, but does not dominate on every precision measure. The gains are accompanied by substantially higher token consumption, API-call volume, and inference time. Ablation results show consistent benefits from the policy and interaction-memory components, whereas the effect of global review depends on the dataset and the available revision budget. These findings characterize tool grounding and runtime policy adaptation as promising but costly mechanisms for improving the controlled construction of structured knowledge representations.",
+        "id": "2611.14492",
+        "title": "ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows",
+        "abstract": "Business process automation runs the same Standard Operating Procedure (SOP) again and again on new inputs. Large Language Model (LLM) agents can follow an SOP written in natural language, but they call an LLM to choose every step of every run, which adds latency and cost at scale. We present ReTrace, which turns an SOP and a few logged agent runs into a reusable workflow in which code, not an LLM, selects the next step. The agent's reasoning, the explanation it writes with each tool call, often states why it took an action; the tool calls alone do not. ReTrace extracts the condition behind each step, merges these conditions across runs into a compact rule document, and generates an executable workflow from it. Only this last stage depends on the platform, so rule documents can be compiled for different orchestration platforms. On $79$ procedures from our production platform, ReTrace workflows reach $93.8\\%$ completion, against $96.8\\%$ for the agent, at $24\\%$ lower cost per task. On $τ^2$-Bench, they reach $75.8\\%$ task success (agent: $80.6\\%$) and run in $1.3$s instead of $170$s; three rounds of repair on training failures lift $k{=}2$ workflows from $66.7\\%$ to $81.2\\%$. On eight SOP-Bench procedures, ReTrace without repair trails few-shot generation ($80.6\\%$ vs. $83.6\\%$), but repair from labeled training failures lifts it to $87.8\\%$ at $0.40$s per task, compared to $85.5\\%$ in $46.6$s for the agent.",
         "authors": [
-          "Jonas Limniatis",
-          "Bennet Schaarmann",
-          "Georg Reuber",
-          "Robert Stahlbock"
+          "Kaiyuan Hou",
+          "Yang Ping Kuo",
+          "Indranil Bhattacharya",
+          "Rohith Nama",
+          "Arushi Gupta",
+          "Carlos D. Castillo",
+          "Prathap Ramachandra",
+          "Xiaofan Jiang",
+          "Francesco Carbone"
         ],
         "categories": [
-          "cs.IR",
-          "cs.AI"
+          "cs.AI",
+          "cs.LG",
+          "cs.MA"
         ],
-        "published": "2026-11-10T12:04:54Z",
-        "url": "https://arxiv.org/abs/2611.13966",
-        "pdf_url": "https://arxiv.org/pdf/2611.13966"
+        "published": "2026-11-10T18:49:47Z",
+        "url": "https://arxiv.org/abs/2611.14492",
+        "pdf_url": "https://arxiv.org/pdf/2611.14492"
       },
-      "lexical_score": 26.088,
+      "lexical_score": 14.68,
       "review": {
-        "score": 7,
-        "title_translated": "受控知识工程：基于工具接地 LLM 智能体与运行时自适应策略的 taxonomy 归纳",
-        "tldr": "该论文提出 TIGA，把 taxonomy 构建建模为在显式状态和受限动作空间上的迭代决策过程，用可执行编辑工具与运行时自适应组织策略约束 LLM 智能体，以减少实体遗漏、幻觉和层级关系错误。",
-        "method": "TIGA 将 taxonomy 归纳形式化为迭代决策过程，结合可执行的 taxonomy 编辑工具、记录工具调用与理由及结果的交互记忆，以及智能体在推理过程中修订的运行时自适应组织策略；另可选一个全局审查器，对照候选实体集与当前策略评估已构建的 taxonomy。",
-        "findings": "在四个基准 taxonomy 和两个 LLM 基座上，TIGA 在多数配置下取得最强的结构质量结果，但并非在所有 precision 指标上都占优；性能提升伴随着显著更高的 token 消耗、API 调用量和推理时间。消融实验显示策略与交互记忆组件带来一致收益，而全局审查的效果取决于数据集和可用的修订预算。",
-        "why_relevant": "该工作涉及 LLM Agent 的工具调用、运行时规划与迭代式结构化构建，与研究者关注的 Agent 工具调用与规划、以及 RAG 相关结构化知识构建直接相关。",
+        "score": 8,
+        "title_translated": "ReTrace：将工具使用智能体蒸馏为免规划器工作流",
+        "tldr": "ReTrace 把自然语言写的 SOP 和少量已记录的 Agent 运行轨迹转换成可复用工作流，让代码而非 LLM 决定每一步，从而在保持接近 Agent 成功率的同时大幅降低延迟和成本。",
+        "method": "从 Agent 的推理文本中抽取每个步骤背后的条件，跨多次运行把这些条件合并成紧凑的规则文档，再编译成可执行工作流；只有最后编译阶段依赖具体编排平台。",
+        "findings": "在生产平台 79 个流程上完成率 93.8%（Agent 96.8%），单任务成本低 24%；在 τ²-Bench 上任务成功率 75.8%（Agent 80.6%），耗时 1.3s 对 170s，三轮修复让 k=2 工作流从 66.7% 提升到 81.2%；在八个 SOP-Bench 流程上，经训练失败修复后达 87.8%、每任务 0.40s，而 Agent 为 85.5%、46.6s。",
+        "why_relevant": "该工作直接研究 Agent 工具调用与规划的成本优化，并给出可跨平台落地的方案和 τ²-Bench 等评测结果，贴合研究者对 Agent 规划与系统评测的关注。",
         "tags": [
-          "LLM Agent",
+          "Agent 工作流",
           "工具调用",
-          "规划",
-          "taxonomy 归纳",
-          "知识工程"
+          "SOP 自动化",
+          "Agent 评测"
         ]
       }
     },
     {
       "paper": {
-        "id": "2611.10477",
-        "title": "PatternBloom: Empowering Agentic RAG with Externalized RL-Distilled Graph Patterns",
-        "abstract": "Reinforcement-learning-trained agents for retrieval-augmented generation retrieve content (passages, knowledge-graph fragments, or hyperedges) and supervise training with outcome rewards on the final answer. Across these paradigms the reasoning route through retrieved content never leaves the language model's hidden state, conflating declarative knowledge with the procedural knowledge that recurs across queries of the same logical type; content-only methods consequently plateau as reasoning depth grows. We introduce PatternBloom, an agentic RAG framework that shifts the unit of retrieval from content (what to read) to logic (how to reason). A first RL stage scores the agent's constructed evidence graph by a frozen oracle's information gain through the Information-Density Reward (IDR), a size-normalized mutual-information surrogate. High-reward trajectories are distilled into a Graph Pattern Memory (GPM) of type-abstracted reasoning skeletons, and a second RL stage uses the Pattern-Augmented Reward (PAR) to couple policy to memory, turning procedural reasoning into a learnable, externalized structural prior. A 7B PatternBloom outperforms $27$ baselines by $+15.0$ Avg-OOD EM, with the gain compounding with reasoning depth precisely because procedural knowledge, once distilled, is reused rather than re-derived at every query. We release our code at https://github.com/EllenYiGe/PatternBloom.",
+        "id": "2611.14320",
+        "title": "Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents",
+        "abstract": "External memory enables LLM agents to improve from experience by distilling trajectories of past tasks into concise lessons for new tasks. However, memory can also lead to memory-induced degradation, where an agent fails on tasks it would solve without memory, often because it follows a lesson that is incorrect, or misapplies or misreads a valid one. This is because lessons are inferred from trajectories labeled only with task success or failure, yet are typically provided without the trajectories they came from, leaving the agent no way to check them. To address this, we introduce WikiTrace, an evidence-linked memory system designed to let agents check each lesson against its original trajectory. Specifically, motivated by the finding that a trajectory often still holds the evidence needed to catch an erroneous lesson, WikiTrace stores each lesson as a concise insight linked to a summary of why its trajectory succeeded or failed and to the raw trajectory itself. Then, on a new task, the agent starts from all insights and, whenever one lacks details needed to act, conflicts with another, or comes from a failed task, descends through its links with terminal tools to fill in missing details or correct the insight before acting. We validate WikiTrace on five agentic benchmarks, showing that it consistently outperforms existing memory approaches and a baseline given the same insights alone, while also reducing memory-induced degradation. Our code is available at https://github.com/yukyeongleee/wikitrace",
         "authors": [
-          "Yi Ge",
-          "Heng Huang"
+          "Yukyeong Lee",
+          "Yumin Choi",
+          "Jinheon Baek",
+          "Sung Ju Hwang"
         ],
         "categories": [
-          "cs.AI"
+          "cs.AI",
+          "cs.MA"
         ],
-        "published": "2026-11-07T05:02:26Z",
-        "url": "https://arxiv.org/abs/2611.10477",
-        "pdf_url": "https://arxiv.org/pdf/2611.10477"
+        "published": "2026-11-10T16:46:59Z",
+        "url": "https://arxiv.org/abs/2611.14320",
+        "pdf_url": "https://arxiv.org/pdf/2611.14320"
       },
-      "lexical_score": 25.656,
+      "lexical_score": 12.094,
       "review": {
-        "score": 7,
-        "title_translated": "PatternBloom：用外部化的强化学习蒸馏图模式增强 Agentic RAG",
-        "tldr": "PatternBloom 把 agentic RAG 的检索单元从「内容」换成「推理逻辑」，用两阶段强化学习把高回报推理路径蒸馏成可复用的图模式记忆。",
-        "method": "第一阶段用一个冻结的 oracle 计算信息增益，以信息密度奖励（IDR）评分 agent 构建的证据图；高奖励轨迹被蒸馏成类型抽象的推理骨架，存进图模式记忆（GPM）；第二阶段用模式增强奖励（PAR）把策略与记忆耦合起来。",
-        "findings": "7B 的 PatternBloom 在 Avg-OOD EM 上比 27 个基线高出 +15.0，而且增益随推理深度增加而扩大；作者称原因是蒸馏后的过程性知识被复用，而不是每次查询都重新推导。",
-        "why_relevant": "这篇论文直接针对 agentic RAG 的检索与推理结构设计，并公开了代码，与研究者关注的 Agent 规划、RAG 应用工程完全对口。",
+        "score": 8,
+        "title_translated": "别只相信你的记忆：证据关联记忆减少 LLM 智能体的记忆诱发退化",
+        "tldr": "论文提出 WikiTrace，一种将每条经验教训与其来源轨迹证据关联的外部记忆系统，让 LLM 智能体在行动前能核查或修正记忆，从而缓解记忆诱发的性能退化。",
+        "method": "每条经验教训以简洁洞见的形式存储，并链接到该轨迹成败原因的摘要以及原始轨迹；在新任务上，智能体从全部洞见出发，当洞见缺少可行动细节、彼此冲突或来自失败任务时，通过链接逐层向下追溯，并借助终端工具补全细节或修正洞见后再行动。",
+        "findings": "在五个智能体基准上，WikiTrace 持续优于现有记忆方法和仅提供相同洞见的基线，同时减少了记忆诱发的退化；代码已开源。",
+        "why_relevant": "该工作直接面向 LLM Agent 的记忆与经验复用、规划与工具调用（终端工具下钻核查），并配有开源代码和面向智能体系统的评测，契合作者的 RAG、Agent 与评测兴趣。",
         "tags": [
-          "Agentic RAG",
-          "强化学习",
-          "推理规划",
-          "知识图谱"
+          "LLM Agent 记忆",
+          "经验复用",
+          "Agent 评测",
+          "工具调用"
         ]
       }
     },
     {
       "paper": {
-        "id": "2611.09298",
-        "title": "Towards an Autonomous AI Steward for Large-Scale Physics Experiments: Integrating Causal Diagnostics, RAG, and Conformal Prediction",
-        "abstract": "Long-term particle physics experiments face critical operational challenges: monitoring non-stationary machine data streams and preserving tacit expert knowledge. We present the \"Helmholtz Co-Pilot,\" a hybrid Multi-Agent System (MAS) acting as an autonomous experiment steward. The system can be triggered interactively by human operators or autonomously by an asynchronous causal diagnostics engine that runs independently of the MAS reasoning core. Continuously monitoring live hardware streams such as data acquisition and slow control, this engine performs dynamic causal discovery to trace cascading alarms back to their root causes and applies adaptive model selection to keep forecasts reliable across shifting machine states; upon detecting an anomaly, it hands a structured diagnostic report to the MAS. The reasoning layer itself relies on a high-throughput C++ core and a Python edge architecture orchestrating a directed acyclic graph (DAG) of specialized ReAct workers. It integrates a Retrieval-Augmented Generation (RAG) backbone for institutional memory and leverages conformal prediction to bound its evidence-based recommendations with mathematical coverage guarantees. This extended abstract outlines the architecture, the integration of software-enforced Human-in-the-Loop (HitL) guardrails, and ongoing shadow-testing within the KATRIN experiment.",
+        "id": "2611.14364",
+        "title": "ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces",
+        "abstract": "Research agents achieve increasingly strong benchmark scores, yet these scores do not necessarily translate into reliable delivery in ongoing research projects. Many research-agent benchmarks emphasize standalone tasks and relatively self-contained workflows in clean or curated workspaces. However, researchers ask agents to complete one step within an ongoing project, where requests depend on earlier session decisions and workspaces contain unfinished files, outdated versions, and failed attempts. We introduce ARE-bench to evaluate whether research agents advance ongoing projects while respecting prior decisions and existing workspace state, grounded in real session context and in-progress workspaces. ARE-bench includes 75 tasks built on agent sessions and full workspaces from recruited researchers' own projects, spanning seven research stages, 33 requirements, and 150 sub-requirements, with 1,173 binary checklist items in total. Each task is anchored at a real user request, preserves its requirements, and summarizes the earlier requests still in effect as background. The complete workspace is replayed to that boundary without cleanup, preserving artifacts from earlier turns. Each checklist is compiled from an intent-aligned rubric and credits any valid solution. Across seven frontier models, the strongest passes every checklist item on only 66.2% of tasks, and Design and Execution rank among the hardest stages for every model. Three models pass about 69% of tasks when only delivery contracts and general norms are checked, but just 28.4% to 40.0% once historical and material or workspace requirements are also checked. Evaluating delivery without these contextual requirements can therefore overestimate research agents and mask differences between them.",
         "authors": [
-          "Oliver Noll",
-          "Nicholas Tan Jerome",
-          "Alexander Lehnen",
-          "Frank Simon",
-          "Frank Maas"
+          "Jiahang Lin",
+          "Wanying Ren",
+          "Wanghan Xu",
+          "Huayu Sha",
+          "Yang Shu",
+          "Zhonghang Lu",
+          "Chengjun Pan",
+          "Yi Dong",
+          "Shichun Liu",
+          "Yuyang Hu",
+          "Shihan Dou",
+          "Honglin Guo",
+          "Huijie Lv",
+          "Pujun Zheng",
+          "Zhe Sun",
+          "Yuankai Ying",
+          "Yiding Wang",
+          "Jiahao Chen",
+          "Zhixiong Yang",
+          "Dingbo Yuan",
+          "Yicheng Zou",
+          "Zhecan Wang",
+          "Guoxiu He",
+          "Xiaoyu Xing",
+          "Qi Zhang",
+          "Tao Gui",
+          "Xuanjing Huang"
         ],
         "categories": [
-          "cs.AI"
+          "cs.CL"
         ],
-        "published": "2026-11-06T10:52:19Z",
-        "url": "https://arxiv.org/abs/2611.09298",
-        "pdf_url": "https://arxiv.org/pdf/2611.09298"
+        "published": "2026-11-10T17:21:31Z",
+        "url": "https://arxiv.org/abs/2611.14364",
+        "pdf_url": "https://arxiv.org/pdf/2611.14364"
       },
-      "lexical_score": 23.281,
+      "lexical_score": 6.919,
       "review": {
-        "score": 7,
-        "title_translated": "面向大型物理实验的自主 AI 管家：融合因果诊断、RAG 与保形预测",
-        "tldr": "该文提出 Helmholtz Co-Pilot 多智能体系统，用于大型物理实验的自主运维监控，结合因果诊断、RAG 机构记忆与保形预测，目前正在 KATRIN 实验中进行影子测试。",
-        "method": "系统由异步因果诊断引擎与基于 DAG 编排的 ReAct 多智能体推理层组成，推理层包含 RAG 检索骨干、保形预测不确定性量化和软件强制的 Human-in-the-Loop 护栏；采用 C++ 高吞吐核心加 Python 边缘架构。",
-        "findings": "摘要仅为扩展摘要，未报告定量结果，只描述了架构设计、护栏集成以及 KATRIN 实验中正在进行的影子测试。",
-        "why_relevant": "该工作将 RAG 与 Agent 规划用于真实系统的运维诊断，涉及多智能体编排与可靠性评估，与研究者关注的 Agent 工具调用、规划及系统评测方向相关。",
+        "score": 8,
+        "title_translated": "ARE-bench：在真实研究者会话与工作空间中评测 Agent 的研究能力",
+        "tldr": "论文提出 ARE-bench，用真实研究者的会话记录与未清理的工作空间来评测研究 Agent 能否在持续进行的项目中尊重既往决策和现有状态，并指出忽略这些语境要求会高估 Agent 表现。",
+        "method": "从受招募研究者的真实项目中构建 75 个任务，覆盖 7 个研究阶段、33 项要求和 150 项子要求，共 1,173 条二元检查项；每个任务锚定一次真实用户请求，将仍生效的先前请求总结为背景，并把完整工作空间按原样回放至该边界，评分采用意图对齐的 rubric 且任何有效解法均可得分。",
+        "findings": "在七个前沿模型中，最强模型也仅在 66.2% 的任务上通过全部检查项，Design 与 Execution 阶段对所有模型都最难；当只检查交付契约与通用规范时，三个模型约通过 69% 的任务，但加上历史与材料/工作空间要求后，通过率降至 28.4% 至 40.0%。",
+        "why_relevant": "该工作直接针对 Agent 的工具使用与规划能力评测，并强调长上下文中的跨会话状态与真实工作空间，正对应研究者对 Agent 系统可落地评测的兴趣。",
         "tags": [
-          "RAG",
-          "Multi-Agent",
-          "Agent 规划",
-          "保形预测"
-        ]
-      }
-    },
-    {
-      "paper": {
-        "id": "2611.09414",
-        "title": "Typed-Centrality Grounding for Agentic GraphRAG: A Symbolic Approach for Agentic Reasoning",
-        "abstract": "Knowledge Graphs (KGs) and Large Language Models (LLMs) represent two approaches for knowledge representation and reasoning over heterogeneous data. Recent research has explored their integration through Graph Retrieval-Augmented Generation (GraphRAG) systems, which use KGs to provide structured context to LLMs. However, existing GraphRAG approaches treat KGs as homogeneous graphs and rely on textual similarity between the input prompt and the context, rather than using it as a source of deterministic knowledge. This work proposes an agent-based GraphRAG system that introduces a symbolic layer to integrate deterministic reasoning alongside text similarities. This approach is based on the definition of typed centralities for KGs, where centrality measures are computed separately for each specific KG's class. This information is used to construct a symbolic representation that is provided to the LLM as a deterministic source. The proposed system was mathematically validated and evaluated on a real-world POLE (Person, Object, Location, Event) dataset, comparing reasoning and information retrieval with and without the symbolic layer. The results indicate that the our approach leads to responses that are more consistent with the context, improving the generated outputs.",
-        "authors": [
-          "Rosario Napoli",
-          "Antonio Celesti",
-          "Massimo Villari",
-          "Maria Fazio"
-        ],
-        "categories": [
-          "cs.AI"
-        ],
-        "published": "2026-11-06T12:45:23Z",
-        "url": "https://arxiv.org/abs/2611.09414",
-        "pdf_url": "https://arxiv.org/pdf/2611.09414"
-      },
-      "lexical_score": 22.628,
-      "review": {
-        "score": 7,
-        "title_translated": "面向 Agentic GraphRAG 的类型化中心性 grounding：一种面向智能体推理的符号化方法",
-        "tldr": "该论文提出一种基于智能体的 GraphRAG 系统，通过在每个知识图谱类别上分别计算中心性，构建符号化表示，作为确定性知识源提供给 LLM，以弥补现有 GraphRAG 仅依赖文本相似度的不足。",
-        "method": "定义知识图谱的“类型化中心性”，按各类别分别计算中心性度量，将其转化为符号表示注入 LLM 上下文，并与文本相似度检索结合，构成带符号层的 agent GraphRAG 框架。",
-        "findings": "在真实 POLE（Person, Object, Location, Event）数据集上对比有/无符号层的推理与信息检索，结果显示加入符号层后生成的回答与上下文更一致，输出质量有所提升；论文同时给出了数学层面的论证。",
-        "why_relevant": "直接涉及 RAG 与 Agent 推理，并探索用结构化知识为 LLM 提供确定性依据，属于该研究者关注的检索增强生成与智能体规划方向。",
-        "tags": [
-          "GraphRAG",
-          "Agent",
-          "知识图谱",
-          "符号推理"
+          "Agent 评测",
+          "benchmark",
+          "长上下文",
+          "研究工作流"
         ]
       }
     }
