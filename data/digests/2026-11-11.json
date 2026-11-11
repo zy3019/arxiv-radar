@@ -1,0 +1,548 @@
+{
+  "date": "2026-11-11",
+  "fetched": 1451,
+  "matched": 1126,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.12125",
+        "title": "CARE-PO: Controllable Tool-Call Efficiency for LLM Agents",
+        "abstract": "External tool calls are a major running cost of an LLM agent, while its training objectives align almost exclusively with task completion. In a step-level diagnosis of Qwen3.5 trajectories at two model sizes on GAIA, a long-horizon tool-use benchmark, we find that most contain removable calls, at a similar rate at both sizes. Some methods add an efficiency reward to the objective to reduce the call count, but introduce problems of their own: the anchor they price calls against is computed from the policy's own rollouts (e.g., the group's shortest correct rollout) and so moves with the policy; training can drift toward a collapsed policy that issues no tool call at all, a degeneracy seen in published reports and in our 27B baseline; and a training run delivers a single operating point, so the user cannot trade efficiency against capability. We present CARE-PO (Controllable Anchored Relative Efficiency Policy Optimization) to mitigate these problems. The efficiency reward prices calls against a reference budget anchored to the task's own difficulty and fixed before training. Injecting a successful trajectory from the training data into each online GRPO rollout group and charging for evidence a trajectory never gathers ease the drift toward a collapsed call count. Shaping the cost curve by an effort tag in the prompt yields an efficiency and a capability operating point from a single training run. On GAIA, five of the six operating points across three model sizes improve on their base model in success rate and call count at once. On four held-out multi-hop benchmarks the result is size-dependent: at 27B and 4B success rate is held or raised at a lower call count, while at 9B both operating points trade success rate for fewer calls. The call count remains well above zero throughout training at all three sizes.",
+        "authors": [
+          "Xiaoyang Ye",
+          "Xiao Yao",
+          "Hairui Zhu",
+          "Yiying Yang",
+          "Bei Gan",
+          "Jinliang Lu",
+          "Tengjin Weng",
+          "Yuan Yao",
+          "Wenhao Jiang"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.AI"
+        ],
+        "published": "2026-11-09T09:41:37Z",
+        "url": "https://arxiv.org/abs/2611.12125",
+        "pdf_url": "https://arxiv.org/pdf/2611.12125"
+      },
+      "lexical_score": 19.911,
+      "review": {
+        "score": 9,
+        "title_translated": "CARE-PO：面向 LLM Agent 的可控工具调用效率",
+        "tldr": "该论文提出 CARE-PO，通过将工具调用成本锚定到任务难度上，并用提示中的 effort 标签调控成本曲线，实现在单次训练中得到效率与能力可权衡的多个工作点，缓解已有的效率奖励方法带来的退化和只产出单一工作点的问题。",
+        "method": "在 GRPO 中引入锚定于任务自身难度的参考预算作为效率奖励的基准（训练前固定，不随策略漂移）；向每个在线 rollout 组注入一条训练数据中的成功轨迹，并对轨迹未收集到的证据施加成本，以抑制不发工具调用的坍缩；同时用提示中的 effort 标签塑造成本曲线，一次训练得到多个工作点。",
+        "findings": "在 GAIA 上，三个模型规模下的六个工作点中有五个同时提升了成功率与调用次数；在四个留出的多跳基准上结果依赖规模：27B 和 4B 在更低调用数下保持或提升成功率，9B 的两个工作点则以成功率换取更少调用；三个规模训练全程调用次数均远高于零。",
+        "why_relevant": "直接面向 Agent 工具调用与规划的效率-能力权衡，并涉及 Agent 系统的评测基准（GAIA 与多跳基准），与研究者关注的 Agent 工具调用和系统评测高度契合。",
+        "tags": [
+          "Agent 工具调用",
+          "强化学习训练",
+          "GRPO",
+          "效率与能力权衡"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10884",
+        "title": "Keeping LLM Agents on Procedure: Executable Finite-State Control for Long-Horizon Instruction Fidelity",
+        "abstract": "Much of the automation handed to language-model agents is procedural: each step needs little intelligence, but a long unattended run must follow a skill or SOP stated once at the start. We show that agents drift from such procedures over long runs, and that restating the instructions or resuming a stopped agent only moves the drift to another shortcut. We study an executable finite-state machine (FSM) that keeps the workflow state outside the model's context and enforces it at three points: tool calls, state transitions and the end of the agent's turn. In a pre-registered experiment on 200-account SOP-Bench batches, Claude Haiku 4.5 with the FSM decided on average 139 accounts correctly and by the procedure, against 48 for the strongest baseline (95% CI of the difference [46, 130]), and kept this rate to the end; across three models, the gain tracked how much the plain agent drifted. Because the runtime, not the model, supplies this long-horizon reliability, the FSM can let small models carry procedural work: Haiku 4.5 with it averaged more such decisions than plain Claude Sonnet 4.6 at 38% of the cost. Analyses on SWE-bench Verified, $τ^2$-bench, and staged and cross-context workflows further suggest that reliable long-horizon automation can come from stronger execution control, not only stronger models.",
+        "authors": [
+          "Yutao Sun",
+          "Haokun Li",
+          "Mingshuai Chen",
+          "Guanyan Li",
+          "Zhongyi Wang",
+          "Shengchao Qin",
+          "Jianwei Yin"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-07T18:09:58Z",
+        "url": "https://arxiv.org/abs/2611.10884",
+        "pdf_url": "https://arxiv.org/pdf/2611.10884"
+      },
+      "lexical_score": 18.091,
+      "review": {
+        "score": 9,
+        "title_translated": "让 LLM Agent 遵守流程：用于长程指令保真的可执行有限状态控制",
+        "tldr": "论文指出现有 LLM Agent 在长程执行中会逐渐偏离开局给定的 SOP，并提出把工作流状态放在模型上下文之外、用可执行有限状态机（FSM）在工具调用、状态迁移和回合结束三处强制约束。",
+        "method": "用一个可执行 FSM 在模型外部维护并强制执行工作流状态，在工具调用、状态转换与回合结束三个检查点施加约束；在预注册实验的 200 账号 SOP-Bench 批次上评测，并扩展到 SWE-bench Verified、τ²-bench 以及分阶段与跨上下文工作流。",
+        "findings": "在 SOP-Bench 上，Claude Haiku 4.5 配 FSM 平均正确且按流程决策 139 个账号，最强基线为 48 个（差值 95% CI [46, 130]），且该比率保持到结束；三个模型上的增益与朴素 Agent 的漂移程度相关；配 FSM 的 Haiku 4.5 作出的此类决策数超过朴素 Claude Sonnet 4.6，成本为其 38%。",
+        "why_relevant": "直接对应研究者关注的 Agent 规划与长程执行可靠性，且提供了可落地的运行时控制手段与多基准评测证据。",
+        "tags": [
+          "LLM Agent",
+          "有限状态机",
+          "长程任务",
+          "流程遵循"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10657",
+        "title": "MMGraph-Agent: Agentic Multimodal RAG via Cache-Inspired Multimodal Knowledge HyperGraphs",
+        "abstract": "Driven by increasingly complex real-world applications, Retrieval-Augmented Generation (RAG) has evolved from textual pipelines to multimodal settings, comprising two complementary dimensions: knowledge organization and retrieval enhancement. However, existing methods still face challenges of high construction cost, context window limitations, and the lack of unified training across offline and online knowledge sources. To address these challenges, we propose MMGraph-Agent, a unified multimodal RAG framework based on cache-inspired multimodal knowledge hypergraphs. MMGraph-Agent enables extremely lightweight hypergraph construction with zero API cost and dynamic memory-based retrieval that alleviates long-context issues. Experiments across offline, online, and joint retrieval settings demonstrate consistent improvements in performance, efficiency, and architectural unification. Our software and data are publicly available at https://github.com/LHRLAB/MMGraph-Agent.",
+        "authors": [
+          "Haoran Luo",
+          "Ziyue Zhu",
+          "Shangyang Wu",
+          "Linhao Luo",
+          "Yikai Guo",
+          "Qika Lin",
+          "Fangzhi Xu",
+          "Jiapu Wang",
+          "Xiaobao Wu",
+          "Yifan Zhu",
+          "Luu Anh Tuan"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-07T11:05:34Z",
+        "url": "https://arxiv.org/abs/2611.10657",
+        "pdf_url": "https://arxiv.org/pdf/2611.10657"
+      },
+      "lexical_score": 35.865,
+      "review": {
+        "score": 8,
+        "title_translated": "MMGraph-Agent：基于缓存启发式多模态知识超图的 Agentic 多模态 RAG",
+        "tldr": "该论文提出统一的多模态 RAG 框架 MMGraph-Agent，用缓存启发式多模态知识超图组织知识并以动态记忆式检索缓解长上下文问题。",
+        "method": "构建零 API 成本、极轻量的多模态知识超图，并结合基于动态记忆的检索机制，统一离线与在线知识源的训练与检索。",
+        "findings": "在离线、在线与联合检索三种设置下均取得性能与效率上的一致性提升，并实现架构统一；摘要未给出具体数值。",
+        "why_relevant": "该工作直接落在研究者的多模态 RAG、Agent 检索与长上下文方向上，且提供开源代码与数据，具备落地参考价值。",
+        "tags": [
+          "多模态 RAG",
+          "知识超图",
+          "Agent 检索",
+          "长上下文"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.13675",
+        "title": "OpticalRAG: Pixel-Space Compression for Token-Efficient Retrieval-Augmented Generation",
+        "abstract": "Retrieval-augmented generation (RAG) is bottlenecked by the token budget of large language models: feeding long documents into the context window is expensive, while aggressive textual compression discards fine-grained information that is irreversibly lost in a one-dimensional token sequence. We argue that this bottleneck is not fundamental to information density but to the choice of compression \\emph{modality}. Modern visual encoders can pack the contents of a rendered text page into roughly a hundred visual tokens with little semantic loss, opening a new compression-fidelity tradeoff that purely textual methods cannot reach. We present \\textbf{OpticalRAG}, a framework that renders documents as page images, encodes them with a frozen vision encoder, and distills the retrieved visual tokens into as few as $16$ injected tokens before passing them to the LLM. Two ingredients make this work without expensive cross-modal training: (i) \\emph{Encoder-Bridged Retrieval}, which projects text-query states into the visual feature space of the frozen encoder, through a projection shared with the compressor, to retrieve visual tokens from a text query, with no contrastive training; and (ii) \\emph{Query-Driven Distillation}, a lightweight cross-attention compressor that condenses the retrieved visual tokens into a small set of query-conditioned prefix tokens. On LongBench-v2, BAMBOO, and LooGLE-v2, OpticalRAG achieves the best compression-aware accuracy (CAP) on all three benchmarks while injecting only $16$ tokens, and improves the closed-book Qwen2.5-7B-Instruct backbone by $5.17$ points on LongBench-v2.Code is available at https://github.com/brighterr/OpticalRAG.",
+        "authors": [
+          "Senhao Liu",
+          "Yuheng Zhang",
+          "Chunyu Wei",
+          "Yueguo Chen",
+          "Xinran Zhang"
+        ],
+        "categories": [
+          "cs.CL"
+        ],
+        "published": "2026-11-10T07:24:50Z",
+        "url": "https://arxiv.org/abs/2611.13675",
+        "pdf_url": "https://arxiv.org/pdf/2611.13675"
+      },
+      "lexical_score": 27.594,
+      "review": {
+        "score": 8,
+        "title_translated": "OpticalRAG：面向 Token 高效检索增强生成的像素空间压缩",
+        "tldr": "该论文将文档渲染为页面图像并用冻结的视觉编码器压缩成极少量的视觉 token（可低至 16 个）再注入 LLM，以缓解 RAG 的上下文 token 预算瓶颈。",
+        "method": "将文档渲染成图像，用冻结视觉编码器和跨注意力压缩器把检索到的视觉 token 蒸馏为查询条件化的少量前缀 token；Encoder-Bridged Retrieval 通过共享投影将文本查询状态映射到视觉特征空间，从而无需对比训练即可检索视觉 token。",
+        "findings": "在 LongBench-v2、BAMBOO 和 LooGLE-v2 上，仅注入 16 个 token 即取得三个基准上最佳的压缩感知准确率（CAP），并在 LongBench-v2 上比闭卷 Qwen2.5-7B-Instruct 基线提升 5.17 分。",
+        "why_relevant": "该工作直接针对 RAG 的上下文效率与长文档检索压缩问题，并提供开源代码，属于检索增强生成应用工程的核心议题。",
+        "tags": [
+          "RAG",
+          "长上下文压缩",
+          "视觉token压缩",
+          "多模态检索"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10156",
+        "title": "DeepResearch RewardBench: Evaluating Reward Models for Deep Research Report",
+        "abstract": "Empowered by Large Language Models (LLMs), deep research systems integrate online information into research reports through multi-step web searching and information synthesis. Evaluating these reports presents a significant challenge due to their long context, high information density, and domain specificity, necessitating the use of AI evaluation as a substitute for prohibitively expensive human assessment. However, few studies have examined the effectiveness of existing reward models or LLMs in understanding and evaluating such research reports. To bridge this gap, we introduce DeepResearch RewardBench, the first benchmark dedicated to evaluating reward modeling for research reports. We collect diverse report candidates from multiple agents or tool-augmented LLMs. These candidates are scored using query-specific golden rubrics, and we ensure data quality and difficulty through a combination of multi-round filtering and human verification. Our benchmark comprises preference datasets formatted as pairs, triplets, and quadruplets to test ranking capabilities across varying levels of difficulty. Extensive experiments demonstrate that while current reward models handle general coherence effectively, their performance significantly degrades when evaluating research reports. Generative LLMs acting as judges demonstrate comprehensive superiority in this domain, with comparative evaluation proving more effective than direct scoring methods. We anticipate that this benchmark will serve as a vital testbed for the evaluation and advancement of research agents.",
+        "authors": [
+          "Shudong Liu",
+          "Yuting Zhong",
+          "Guanhua Chen",
+          "Xinyi Yang",
+          "Junnan Liu",
+          "Lidia S. Chao",
+          "Jiaheng Liu",
+          "Derek F. Wong"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "published": "2026-11-06T19:23:48Z",
+        "url": "https://arxiv.org/abs/2611.10156",
+        "pdf_url": "https://arxiv.org/pdf/2611.10156"
+      },
+      "lexical_score": 24.058,
+      "review": {
+        "score": 8,
+        "title_translated": "DeepResearch RewardBench：评估深度研究报告的奖励模型",
+        "tldr": "这篇论文构建了首个针对深度研究（deep research）报告评估的奖励模型基准，用标注式评分检验现有奖励模型与 LLM 评委在长上下文、高信息密度报告上的表现。",
+        "method": "从多个 agent 或工具增强 LLM 收集多样化报告候选，用查询特定 golden rubrics 打分，经多轮过滤与人工核验保证质量与难度，并构建 pair、triplet、quadruplet 形式的偏好数据集以测试不同难度的排序能力。",
+        "findings": "实验表明，现有奖励模型能较好处理一般连贯性，但在评估研究报告时性能显著下降；作为评委的生成式 LLM 在该领域表现全面占优，且比较式评估优于直接打分。",
+        "why_relevant": "直接对应研究者关心的 Agent 输出与长上下文系统的评测方法，并为设计 AI 评委式评测提供了可复用基准。",
+        "tags": [
+          "reward model",
+          "LLM-as-judge",
+          "deep research",
+          "benchmark"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.11771",
+        "title": "ARMOR: Adaptive Curriculum Meta-Learning for Noise-Robust RAG Reasoning",
+        "abstract": "Retrieval-Augmented Generation (RAG) systems have demonstrated remarkable effectiveness in mitigating hallucinations by incorporating external knowledge. However, the retrieval process inevitably introduces noise, posing significant challenges to RAG robustness. Fundamentally, noise robustness is a composite competency encompassing noise identification, retrieval filtering, and robust reasoning. Unfortunately, existing methods often fail to capture this holistic nature, typically restricted to single-dimensional enhancements or hampered by noise-induced optimization interference. To address these limitations, we decompose RAG robustness into three sub-tasks: knowledge boundary perception, retrieval verification, and robust reasoning. Accordingly, we propose ARMOR, an Adaptive Curriculum Meta-Learning for Noise Robust RAG Reasoning. Inspired by the teaching process, ARMOR introduces an adaptive task scheduler as a teacher to curate training plans according to the absolute learning progress of RAG generators (Student). Distinct from GRPO, ARMOR utilizes inter-group advantage estimation during learning to effectively mitigate mode collapse caused by limited output spaces. Experiments on three complex reasoning datasets (2WikiMultiHopQA, MusiQue, and HotPotQA) indicate that ARMOR achieves synergistic improvements in retrieval noise robustness, significantly outperforming baselines in output quality.",
+        "authors": [
+          "Yan Wang",
+          "Yuxin Zhang",
+          "Shenyu Zhang",
+          "Yongrui Chen",
+          "Sheng Bi",
+          "Guilin Qi"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-09T02:22:48Z",
+        "url": "https://arxiv.org/abs/2611.11771",
+        "pdf_url": "https://arxiv.org/pdf/2611.11771"
+      },
+      "lexical_score": 23.991,
+      "review": {
+        "score": 8,
+        "title_translated": "ARMOR：面向噪声鲁棒 RAG 推理的自适应课程元学习",
+        "tldr": "ARMOR 将 RAG 的噪声鲁棒性拆解为知识边界感知、检索验证与鲁棒推理三个子任务，用自适应课程元学习安排训练计划以提升生成器在噪声检索下的推理质量。",
+        "method": "提出自适应任务调度器充当“教师”，依据 RAG 生成器（学生）的绝对学习进度来编排训练课程；与 GRPO 不同，采用组间优势估计以缓解输出空间受限导致的模式崩溃。",
+        "findings": "在 2WikiMultiHopQA、MusiQue 和 HotPotQA 三个复杂推理数据集上，ARMOR 在检索噪声鲁棒性与输出质量上均取得协同提升，显著优于基线。",
+        "why_relevant": "该工作直接聚焦 RAG 的噪声鲁棒性与评测场景（多跳 QA 数据集），属于检索增强生成应用工程的核心议题。",
+        "tags": [
+          "RAG",
+          "噪声鲁棒性",
+          "课程学习",
+          "元学习"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10335",
+        "title": "Two-Sided Conformal Evidence Sets for Retrieval-Augmented Generation",
+        "abstract": "Retrieval-augmented generation (RAG) can surface passages that support a claim, contradict it, or fail to address it, yet existing calibrated grounding methods are typically one-sided and model only supporting evidence. We introduce Conformal Evidence Sets (CES), a two-sided framework that returns separate support and refutation sets with finite-sample inclusion coverage of at least $1-α$ on each side under exchangeability; a Bonferroni union yields joint coverage of at least $1-2α$. On labeled candidate pools from the contrastive VitaminC benchmark, CES closely tracks nominal coverage across $α\\!\\in\\!\\{0.05,0.10,0.15,0.20,0.30\\}$, with maximum deviations of $3.0$ percentage points for support and $5.4$ for refutation, and reaches essentially the same empirical coverage--size frontier as a test-tuned fixed-threshold heuristic without any test exposure. Stress tests mark the boundary of that guarantee: under FEVER distribution shift both sides under-cover, by up to $12.7$ percentage points, and support-side group-stratified recalibration substantially reduces the support gap. Scorer swaps, hard-negative retrieval, cross-dataset transfer, and a live end-to-end pilot expose a clear separation: when exchangeability holds and relevant evidence is retrieved, evidence inclusion remains calibrated even with an imperfect scorer, whereas the support/refute verdict tracks scorer quality directly. Calibrated evidence coverage and reliable verdicts are therefore distinct properties and should be reported separately.",
+        "authors": [
+          "Ben Jenkins",
+          "Mihaela Cardei"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.CL"
+        ],
+        "published": "2026-11-07T00:07:52Z",
+        "url": "https://arxiv.org/abs/2611.10335",
+        "pdf_url": "https://arxiv.org/pdf/2611.10335"
+      },
+      "lexical_score": 22.542,
+      "review": {
+        "score": 8,
+        "title_translated": "面向检索增强生成的双侧共形证据集",
+        "tldr": "该论文提出 Conformal Evidence Sets（CES），一种双侧共形框架，为 RAG 中的支持证据与反驳证据分别给出带有限样本覆盖保证的集合，并强调校准的证据覆盖与可靠的判定是两种不同性质。",
+        "method": "基于共形预测，分别构造支持集与反驳集，在可交换性假设下各自达到至少 1-α 的单侧包含覆盖，再用 Bonferroni 合并得到至少 1-2α 的联合覆盖；并在 VitaminC、FEVER 等基准上做覆盖-集合大小前沿对比与压力测试。",
+        "findings": "在 VitaminC 标注候选池上，CES 在 α∈{0.05,0.10,0.15,0.20,0.30} 下最大偏差为支持侧 3.0 个百分点、反驳侧 5.4 个百分点，达到与测试调优的固定阈值启发式几乎相同的覆盖-大小前沿；在 FEVER 分布偏移下双侧均欠覆盖，最多达 12.7 个百分点，支持侧分层重校准可显著缩小缺口；实验显示证据包含的校准在评分器不完美时仍成立，而支持/反驳判定则直接随评分器质量变化。",
+        "why_relevant": "该工作直接面向 RAG 的证据校准与系统评测，提出覆盖保证与判定可靠性应分开报告，对关注 RAG 评测方法的该研究者有较高参考价值。",
+        "tags": [
+          "RAG",
+          "共形预测",
+          "证据校准",
+          "评测方法"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.09807",
+        "title": "Compaction, decay and reinforcement in a two-tier conversational memory: a paired evaluation against retrieval-augmented generation",
+        "abstract": "A conversational agent that remembers has to decide what to keep. Retrieval-augmented generation keeps the transcript and searches it; the alternative is to compact each turn into atomic facts and search those. We compare the two on LoCoMo, with both arms answering all 1,985 questions in one window, against the same stores, with the same generator and judge, and both predictions on one row, which licenses McNemar's exact test on the 512 questions where they disagree. On the four categories comparable work reports, compaction scores 71.4 per cent against 64.6, a lead of 6.8 points (p = 5.5e-08) at 34 per cent fewer prompt tokens. On all five, including the adversarial set comparable work drops, the lead falls to 2.0 and stops being significant, because the baseline leads adversarial by 14.6. That loss has a structure. Our lead falls as the reference answer demands more source wording, 9.6 points ahead at one or two reference words and 3.1 behind past eight, with token overlap moving the same way, so the judge is not the cause. Compaction keeps what a fact asserts and discards how it was said, so it wins where the answer is a value and loses where it is a phrasing. We also report four negative results with their power calculations.",
+        "authors": [
+          "Osamudiamen Edogun",
+          "Joshua Obigwe",
+          "Irfan Mehmood"
+        ],
+        "categories": [
+          "cs.CL"
+        ],
+        "published": "2026-11-06T17:56:37Z",
+        "url": "https://arxiv.org/abs/2611.09807",
+        "pdf_url": "https://arxiv.org/pdf/2611.09807"
+      },
+      "lexical_score": 20.038,
+      "review": {
+        "score": 8,
+        "title_translated": "两层对话记忆中的压缩、衰减与强化：与检索增强生成的配对评估",
+        "tldr": "论文在 LoCoMo 上配对比较“将每轮对话压缩为原子事实再检索”与“保留原始对话并检索（RAG）”两种记忆方案，发现压缩在事实型问题上更省 token 且更准确，但在需要原文措辞或对抗性问题上优势消失甚至反转。",
+        "method": "两种记忆方案使用相同的存储、生成器和评判器，在同一窗口内回答全部 1,985 个问题；对 512 个两方案答案不一致的问题做 McNemar 精确检验，并按参考答案所需原文字数分层分析。",
+        "findings": "在可比工作报告的四个类别上，压缩方案得 71.4%，RAG 得 64.6%，领先 6.8 个百分点（p = 5.5e-08），且 prompt token 少 34%；纳入第五个对抗性类别后，领先缩小到 2.0 个百分点且不再显著（基线在对抗性类别上领先 14.6 个百分点）。领先幅度随参考答案所需原文字数增加而下降：需要 1 至 2 个参考词时领先 9.6 个百分点，超过 8 个时落后 3.1 个百分点。",
+        "why_relevant": "该论文直接对比 RAG 与事实压缩两种长上下文记忆策略，配对评测设计严谨，并可复现其分层分析，与研究者关注的长上下文、RAG 和系统评测高度相关。",
+        "tags": [
+          "RAG",
+          "长上下文",
+          "对话记忆",
+          "评测方法"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.09113",
+        "title": "Authorization Drift in LLM Agents: Evaluating Boundary Compliance in Multi-Step Tool Use",
+        "abstract": "LLM agents can exceed their authorization boundaries while pursuing user goals without an adversary. We formalize this phenomenon as authorization drift across data, tool, scope, and time, and introduce the Authorization Drift Benchmark (ADB): 648 samples across seven domains, each pairing a sufficient compliant path with an attractive unauthorized shortcut. To ensure executable tasks, tempting shortcuts, and feasible compliant paths, Staged Execution-Reflective Synthesis (SERS) grounds benchmark validation in real agent rollouts rather than LLM self-critique. Across 13 LLMs and three frameworks (25,207 trajectories), greater capability accompanies greater drift, with frontier-capable models exhibiting drift rates of 0.43 to 0.61. Yet 86.18% of tasks admit an observed clean-success trajectory, showing that drift is avoidable. Drift is persistent and dominated by early data over-collection; apparent improvements under agentic scaffolds coincide with collapsing clean-completion performance. To understand potential harms to individuals and society, we map drift points to legal provisions across four jurisdictions, connecting overreach to privacy and information-security concerns. Data minimisation is the most frequently implicated provision, and 93.5% of legally grounded drifting runs map to multiple jurisdictions, making the potential consequences of authorization drift more interpretable.",
+        "authors": [
+          "Chuxue Cao",
+          "Jingru Zeng",
+          "Boqin Yin",
+          "Yujin Zhou",
+          "Yidan Huang",
+          "Sujin Chen",
+          "Jinluan Yang",
+          "Haoran Li",
+          "Yike Guo",
+          "Sirui Han"
+        ],
+        "categories": [
+          "cs.CR",
+          "cs.LG"
+        ],
+        "published": "2026-11-06T07:47:25Z",
+        "url": "https://arxiv.org/abs/2611.09113",
+        "pdf_url": "https://arxiv.org/pdf/2611.09113"
+      },
+      "lexical_score": 19.686,
+      "review": {
+        "score": 8,
+        "title_translated": "LLM Agent 中的授权漂移：评估多步工具使用中的边界合规性",
+        "tldr": "论文形式化并基准测试了 LLM Agent 在无对抗情况下为达成用户目标而越出授权边界的行为，即“授权漂移”，并给出跨模型、跨框架的实证评测与法律风险映射。",
+        "method": "提出 Authorization Drift Benchmark (ADB)：648 个样本覆盖七个领域，每题同时提供一条充分合规路径与一条有吸引力的越权捷径；用 Staged Execution-Reflective Synthesis (SERS) 基于真实 agent rollout 验证任务可执行性与合规路径可行性，并在 13 个 LLM、3 个框架上跑出 25,207 条轨迹。",
+        "findings": "能力越强漂移越多，前沿模型漂移率为 0.43–0.61；但 86.18% 的任务存在观测到的干净成功轨迹，说明漂移可避免。漂移具有持续性，主要源于早期数据过度收集，且在 agentic scaffold 下表面改善的同时干净完成率下降；漂移点被映射到四个法域的法律条款，数据最小化是最常涉及的条款，93.5% 的法律相关漂移运行跨多个法域。",
+        "why_relevant": "直接面向 Agent 工具调用中的边界与安全问题，并提供了可复用的评测基准与真实 rollout 评测方法，契合该研究者对 Agent 评测与落地工程的关注。",
+        "tags": [
+          "LLM Agent",
+          "工具调用",
+          "安全评测",
+          "基准测试"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10170",
+        "title": "Where Did the Evidence Go? Diagnosing Proof-Set Loss in Long-Term Conversational Memory",
+        "abstract": "Long-term conversational question answering can require several separated dialogue turns that support an answer only together. We introduce EviCover, a retrieval approach designed to retain this complementary evidence. It converts questions into observable evidence requirements, checks requirement coverage using retrieved source identifiers, and selects turns jointly. We track annotated support sets - the benchmark-labeled dialogue turns associated with each question - through retrieval, reranking, and final answer-generation context. We evaluate the baseline memory pipeline on generated, human-verified LoCoMo conversations and human-written REALTALK conversations, and examine EviCover on REALTALK's 108 multi-hop questions. Compared with the hybrid lexical/dense baseline, support-turn recall among 60 candidate turns rises from 0.526 to 0.575, and recall in the final ten-turn context rises from 0.349 to 0.379. The evidence funnel identifies separate discovery and selection failures, while paired answer evaluation shows that greater evidence recall does not yet establish a correctness gain. This analysis locates where complementary evidence is lost and distinguishes evidence retrieval from its use in answer generation.",
+        "authors": [
+          "Bogdan Roshchupkin",
+          "Maria Khodorchenko"
+        ],
+        "categories": [
+          "cs.CL",
+          "cs.AI"
+        ],
+        "published": "2026-11-06T19:47:08Z",
+        "url": "https://arxiv.org/abs/2611.10170",
+        "pdf_url": "https://arxiv.org/pdf/2611.10170"
+      },
+      "lexical_score": 18.747,
+      "review": {
+        "score": 8,
+        "title_translated": "证据去了哪里？诊断长期对话记忆中的证明集丢失",
+        "tldr": "论文追踪标注的证据支持轮次在检索、重排和最终生成上下文各阶段的保留情况，并提出 EviCover 以保留多轮对话中互补的证据。",
+        "method": "EviCover 将问题转化为可观测的证据需求，用检索到的来源标识检查需求覆盖情况，并联合选择对话轮次；作者在 LoCoMo 与 REALTALK 对话数据上追踪证据支持集在整条记忆管线中的流失。",
+        "findings": "相较混合词法/稠密检索基线，60 个候选轮次中的支持轮次召回率从 0.526 升至 0.575，最终十轮上下文中的召回率从 0.349 升至 0.379；配对答案评测显示，证据召回提升尚未带来正确率提升。",
+        "why_relevant": "该工作直接针对长上下文与 RAG 中多跳证据的检索和评测，并区分证据检索与证据在生成中的使用，与研究者对长上下文和系统评测的关注高度契合。",
+        "tags": [
+          "长上下文",
+          "多跳检索",
+          "RAG 评测",
+          "对话记忆"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10412",
+        "title": "TurnFlow: Benchmarking User-State Reasoning in Multi-Turn LLM Agents via Scene-Guided User Simulation",
+        "abstract": "Large Language Models (LLMs) are increasingly deployed through conversational interfaces, yet strong single-turn performance does not imply reliability in multi-turn settings. Multi-turn assistance requires a model to maintain an evolving representation of user requirements and to reason over it before complying with later requests. Failures can therefore be subtle: models may fail to recognize a changed constraint or hidden conflict, or recognize it without enforcing it in the final response. Existing benchmarks primarily test fully specified prompts, long-context recall, or controlled domain environments, leaving open-domain requirement reconciliation undermeasured. We introduce TurnFlow, an interactive benchmark for evaluating whether models preserve, revise, and act on user requirements across turns. TurnFlow combines adaptive user simulation with verifiable judging, allowing conversations to unfold naturally while keeping hidden requirements and pass/fail criteria controlled. In our evaluation, nine LLMs achieve overall pass rates from 42.86% to 59.59% on 490 scenarios. Performance varies substantially across challenge types: models perform well on Stateful Multi-Constraint Following but remain considerably less reliable on Scope Creep and Goal Shift. These results reveal persistent limitations in reasoning over evolving user requirements across turns.",
+        "authors": [
+          "Zhixun Chen",
+          "Ming Li",
+          "Anjie Liu",
+          "Xiaoyuan Zhang",
+          "Quanyu Dai",
+          "Huangxun Chen"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-07T02:45:54Z",
+        "url": "https://arxiv.org/abs/2611.10412",
+        "pdf_url": "https://arxiv.org/pdf/2611.10412"
+      },
+      "lexical_score": 18.595,
+      "review": {
+        "score": 8,
+        "title_translated": "TurnFlow：通过场景引导的用户模拟评测多轮 LLM Agent 中的用户状态推理",
+        "tldr": "TurnFlow 构建了一个交互式基准，用自适应的用户模拟和可验证的判定来评估模型能否在多轮对话中保持、修正并执行用户需求。",
+        "method": "将场景引导的自适应用户模拟与隐藏需求和通过/失败判据的可验证判定结合，让对话自然展开，并在 490 个场景上评测九个 LLM。",
+        "findings": "九个 LLM 的整体通过率为 42.86% 至 59.59%；模型在 Stateful Multi-Constraint Following 上表现较好，但在 Scope Creep 和 Goal Shift 上明显更不可靠。",
+        "why_relevant": "这篇工作直接关系到研究者关注的长上下文与多轮 Agent 评测，提供了可落地的交互式评测方法和开源基准思路。",
+        "tags": [
+          "多轮对话",
+          "Agent 评测",
+          "用户模拟",
+          "需求跟踪"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.13966",
+        "title": "Controlled Knowledge Engineering for Taxonomy Induction with Tool-Grounded LLM Agents and Runtime-Adaptive Policies",
+        "abstract": "Taxonomies are structured knowledge representations that support semantic search, recommendation, product catalog organization, and retrieval-augmented generation. Their automated construction from a fixed set of candidate entities requires more than plausible text generation: the resulting hierarchy must be complete, structurally valid, and semantically coherent. Large Language Models (LLMs) are promising for this task, but iterative free-form generation remains vulnerable to omitted or hallucinated entities, invalid hierarchical relations, and inconsistent organizational principles. We introduce TIGA (Taxonomy Induction with Tool-Grounded Agents), a knowledge-engineering architecture that formulates taxonomy induction as an iterative decision process over an explicit state and constrained action space. TIGA combines executable taxonomy-editing tools, an memory that records tool calls, rationales, and outcomes, and a runtime-adaptive organizational policy that the agent revises during inference. An optional global reviewer evaluates the constructed taxonomy against the candidate set and the active policy. We evaluate TIGA on four benchmark taxonomies using two LLM backbones and compare it with single-shot and iterative prompting-based baselines. TIGA achieves the strongest structural-quality results in most evaluated configurations, but does not dominate on every precision measure. The gains are accompanied by substantially higher token consumption, API-call volume, and inference time. Ablation results show consistent benefits from the policy and interaction-memory components, whereas the effect of global review depends on the dataset and the available revision budget. These findings characterize tool grounding and runtime policy adaptation as promising but costly mechanisms for improving the controlled construction of structured knowledge representations.",
+        "authors": [
+          "Jonas Limniatis",
+          "Bennet Schaarmann",
+          "Georg Reuber",
+          "Robert Stahlbock"
+        ],
+        "categories": [
+          "cs.IR",
+          "cs.AI"
+        ],
+        "published": "2026-11-10T12:04:54Z",
+        "url": "https://arxiv.org/abs/2611.13966",
+        "pdf_url": "https://arxiv.org/pdf/2611.13966"
+      },
+      "lexical_score": 26.088,
+      "review": {
+        "score": 7,
+        "title_translated": "受控知识工程：基于工具接地 LLM 智能体与运行时自适应策略的 taxonomy 归纳",
+        "tldr": "该论文提出 TIGA，把 taxonomy 构建建模为在显式状态和受限动作空间上的迭代决策过程，用可执行编辑工具与运行时自适应组织策略约束 LLM 智能体，以减少实体遗漏、幻觉和层级关系错误。",
+        "method": "TIGA 将 taxonomy 归纳形式化为迭代决策过程，结合可执行的 taxonomy 编辑工具、记录工具调用与理由及结果的交互记忆，以及智能体在推理过程中修订的运行时自适应组织策略；另可选一个全局审查器，对照候选实体集与当前策略评估已构建的 taxonomy。",
+        "findings": "在四个基准 taxonomy 和两个 LLM 基座上，TIGA 在多数配置下取得最强的结构质量结果，但并非在所有 precision 指标上都占优；性能提升伴随着显著更高的 token 消耗、API 调用量和推理时间。消融实验显示策略与交互记忆组件带来一致收益，而全局审查的效果取决于数据集和可用的修订预算。",
+        "why_relevant": "该工作涉及 LLM Agent 的工具调用、运行时规划与迭代式结构化构建，与研究者关注的 Agent 工具调用与规划、以及 RAG 相关结构化知识构建直接相关。",
+        "tags": [
+          "LLM Agent",
+          "工具调用",
+          "规划",
+          "taxonomy 归纳",
+          "知识工程"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.10477",
+        "title": "PatternBloom: Empowering Agentic RAG with Externalized RL-Distilled Graph Patterns",
+        "abstract": "Reinforcement-learning-trained agents for retrieval-augmented generation retrieve content (passages, knowledge-graph fragments, or hyperedges) and supervise training with outcome rewards on the final answer. Across these paradigms the reasoning route through retrieved content never leaves the language model's hidden state, conflating declarative knowledge with the procedural knowledge that recurs across queries of the same logical type; content-only methods consequently plateau as reasoning depth grows. We introduce PatternBloom, an agentic RAG framework that shifts the unit of retrieval from content (what to read) to logic (how to reason). A first RL stage scores the agent's constructed evidence graph by a frozen oracle's information gain through the Information-Density Reward (IDR), a size-normalized mutual-information surrogate. High-reward trajectories are distilled into a Graph Pattern Memory (GPM) of type-abstracted reasoning skeletons, and a second RL stage uses the Pattern-Augmented Reward (PAR) to couple policy to memory, turning procedural reasoning into a learnable, externalized structural prior. A 7B PatternBloom outperforms $27$ baselines by $+15.0$ Avg-OOD EM, with the gain compounding with reasoning depth precisely because procedural knowledge, once distilled, is reused rather than re-derived at every query. We release our code at https://github.com/EllenYiGe/PatternBloom.",
+        "authors": [
+          "Yi Ge",
+          "Heng Huang"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-07T05:02:26Z",
+        "url": "https://arxiv.org/abs/2611.10477",
+        "pdf_url": "https://arxiv.org/pdf/2611.10477"
+      },
+      "lexical_score": 25.656,
+      "review": {
+        "score": 7,
+        "title_translated": "PatternBloom：用外部化的强化学习蒸馏图模式增强 Agentic RAG",
+        "tldr": "PatternBloom 把 agentic RAG 的检索单元从「内容」换成「推理逻辑」，用两阶段强化学习把高回报推理路径蒸馏成可复用的图模式记忆。",
+        "method": "第一阶段用一个冻结的 oracle 计算信息增益，以信息密度奖励（IDR）评分 agent 构建的证据图；高奖励轨迹被蒸馏成类型抽象的推理骨架，存进图模式记忆（GPM）；第二阶段用模式增强奖励（PAR）把策略与记忆耦合起来。",
+        "findings": "7B 的 PatternBloom 在 Avg-OOD EM 上比 27 个基线高出 +15.0，而且增益随推理深度增加而扩大；作者称原因是蒸馏后的过程性知识被复用，而不是每次查询都重新推导。",
+        "why_relevant": "这篇论文直接针对 agentic RAG 的检索与推理结构设计，并公开了代码，与研究者关注的 Agent 规划、RAG 应用工程完全对口。",
+        "tags": [
+          "Agentic RAG",
+          "强化学习",
+          "推理规划",
+          "知识图谱"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.09298",
+        "title": "Towards an Autonomous AI Steward for Large-Scale Physics Experiments: Integrating Causal Diagnostics, RAG, and Conformal Prediction",
+        "abstract": "Long-term particle physics experiments face critical operational challenges: monitoring non-stationary machine data streams and preserving tacit expert knowledge. We present the \"Helmholtz Co-Pilot,\" a hybrid Multi-Agent System (MAS) acting as an autonomous experiment steward. The system can be triggered interactively by human operators or autonomously by an asynchronous causal diagnostics engine that runs independently of the MAS reasoning core. Continuously monitoring live hardware streams such as data acquisition and slow control, this engine performs dynamic causal discovery to trace cascading alarms back to their root causes and applies adaptive model selection to keep forecasts reliable across shifting machine states; upon detecting an anomaly, it hands a structured diagnostic report to the MAS. The reasoning layer itself relies on a high-throughput C++ core and a Python edge architecture orchestrating a directed acyclic graph (DAG) of specialized ReAct workers. It integrates a Retrieval-Augmented Generation (RAG) backbone for institutional memory and leverages conformal prediction to bound its evidence-based recommendations with mathematical coverage guarantees. This extended abstract outlines the architecture, the integration of software-enforced Human-in-the-Loop (HitL) guardrails, and ongoing shadow-testing within the KATRIN experiment.",
+        "authors": [
+          "Oliver Noll",
+          "Nicholas Tan Jerome",
+          "Alexander Lehnen",
+          "Frank Simon",
+          "Frank Maas"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-06T10:52:19Z",
+        "url": "https://arxiv.org/abs/2611.09298",
+        "pdf_url": "https://arxiv.org/pdf/2611.09298"
+      },
+      "lexical_score": 23.281,
+      "review": {
+        "score": 7,
+        "title_translated": "面向大型物理实验的自主 AI 管家：融合因果诊断、RAG 与保形预测",
+        "tldr": "该文提出 Helmholtz Co-Pilot 多智能体系统，用于大型物理实验的自主运维监控，结合因果诊断、RAG 机构记忆与保形预测，目前正在 KATRIN 实验中进行影子测试。",
+        "method": "系统由异步因果诊断引擎与基于 DAG 编排的 ReAct 多智能体推理层组成，推理层包含 RAG 检索骨干、保形预测不确定性量化和软件强制的 Human-in-the-Loop 护栏；采用 C++ 高吞吐核心加 Python 边缘架构。",
+        "findings": "摘要仅为扩展摘要，未报告定量结果，只描述了架构设计、护栏集成以及 KATRIN 实验中正在进行的影子测试。",
+        "why_relevant": "该工作将 RAG 与 Agent 规划用于真实系统的运维诊断，涉及多智能体编排与可靠性评估，与研究者关注的 Agent 工具调用、规划及系统评测方向相关。",
+        "tags": [
+          "RAG",
+          "Multi-Agent",
+          "Agent 规划",
+          "保形预测"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.09414",
+        "title": "Typed-Centrality Grounding for Agentic GraphRAG: A Symbolic Approach for Agentic Reasoning",
+        "abstract": "Knowledge Graphs (KGs) and Large Language Models (LLMs) represent two approaches for knowledge representation and reasoning over heterogeneous data. Recent research has explored their integration through Graph Retrieval-Augmented Generation (GraphRAG) systems, which use KGs to provide structured context to LLMs. However, existing GraphRAG approaches treat KGs as homogeneous graphs and rely on textual similarity between the input prompt and the context, rather than using it as a source of deterministic knowledge. This work proposes an agent-based GraphRAG system that introduces a symbolic layer to integrate deterministic reasoning alongside text similarities. This approach is based on the definition of typed centralities for KGs, where centrality measures are computed separately for each specific KG's class. This information is used to construct a symbolic representation that is provided to the LLM as a deterministic source. The proposed system was mathematically validated and evaluated on a real-world POLE (Person, Object, Location, Event) dataset, comparing reasoning and information retrieval with and without the symbolic layer. The results indicate that the our approach leads to responses that are more consistent with the context, improving the generated outputs.",
+        "authors": [
+          "Rosario Napoli",
+          "Antonio Celesti",
+          "Massimo Villari",
+          "Maria Fazio"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-06T12:45:23Z",
+        "url": "https://arxiv.org/abs/2611.09414",
+        "pdf_url": "https://arxiv.org/pdf/2611.09414"
+      },
+      "lexical_score": 22.628,
+      "review": {
+        "score": 7,
+        "title_translated": "面向 Agentic GraphRAG 的类型化中心性 grounding：一种面向智能体推理的符号化方法",
+        "tldr": "该论文提出一种基于智能体的 GraphRAG 系统，通过在每个知识图谱类别上分别计算中心性，构建符号化表示，作为确定性知识源提供给 LLM，以弥补现有 GraphRAG 仅依赖文本相似度的不足。",
+        "method": "定义知识图谱的“类型化中心性”，按各类别分别计算中心性度量，将其转化为符号表示注入 LLM 上下文，并与文本相似度检索结合，构成带符号层的 agent GraphRAG 框架。",
+        "findings": "在真实 POLE（Person, Object, Location, Event）数据集上对比有/无符号层的推理与信息检索，结果显示加入符号层后生成的回答与上下文更一致，输出质量有所提升；论文同时给出了数学层面的论证。",
+        "why_relevant": "直接涉及 RAG 与 Agent 推理，并探索用结构化知识为 LLM 提供确定性依据，属于该研究者关注的检索增强生成与智能体规划方向。",
+        "tags": [
+          "GraphRAG",
+          "Agent",
+          "知识图谱",
+          "符号推理"
+        ]
+      }
+    }
+  ]
+}
