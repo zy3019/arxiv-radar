@@ -27,7 +27,7 @@ LABELS = {
         "empty_day": "今天没有符合条件的论文。",
         "empty_site": "还没有数据，运行一次 arxiv-radar run 后这里就会出现内容。",
         "no_llm_banner": "这一期没有使用 AI：论文只按关键词排序，也没有中文摘要。"
-        "配置 ANTHROPIC_API_KEY 后即可开启。",
+        "配置 LLM_API_KEY 后即可开启。",
         "archive": "往期",
         "feed": "RSS 订阅",
         "credit": "感谢 arXiv 开放其数据接口。AI 摘要可能有误，请以原文为准。",
@@ -43,7 +43,7 @@ LABELS = {
         "empty_day": "No papers met the bar today.",
         "empty_site": "No data yet. Run arxiv-radar run and this page will fill in.",
         "no_llm_banner": "This issue was built without AI: papers are ranked by keyword "
-        "and have no summaries. Set ANTHROPIC_API_KEY to turn it on.",
+        "and have no summaries. Set LLM_API_KEY to turn it on.",
         "archive": "Archive",
         "feed": "RSS feed",
         "credit": "Thank you to arXiv for use of its open access interoperability. "

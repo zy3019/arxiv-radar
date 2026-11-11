@@ -8,24 +8,25 @@ import os
 import sys
 from pathlib import Path
 
-import anthropic
-
-from .config import load_config
+from .config import Config, load_config
 from .fetch import ArxivError
-from .llm import Reviewer
+from .llm import LLMError, Reviewer, make_reviewer
 from .pipeline import run
 from .render import build_site
 
 log = logging.getLogger("arxiv_radar")
 
 
-def _make_reviewer(config, no_llm: bool) -> Reviewer | None:
+def _make_reviewer(config: Config, no_llm: bool) -> Reviewer | None:
     if no_llm:
         return None
-    if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
-        log.warning("ANTHROPIC_API_KEY is not set: ranking by keyword only, with no summaries")
+    api_key = os.environ.get(config.llm.api_key_env)
+    if not api_key:
+        log.warning(
+            "%s is not set: ranking by keyword only, with no summaries", config.llm.api_key_env
+        )
         return None
-    return Reviewer(config.llm, config.interests, config.language)
+    return make_reviewer(config.llm, config.interests, config.language, api_key)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -48,8 +49,8 @@ def main(argv: list[str] | None = None) -> int:
         except ArxivError as error:
             log.error("%s", error)
             return 1
-        except anthropic.APIStatusError as error:
-            log.error("Claude API rejected the request (HTTP %s): %s", error.status_code, error.message)
+        except LLMError as error:
+            log.error("%s", error)
             return 1
         if digest is None:
             log.info("Nothing new on arXiv since the last run")

@@ -1,11 +1,10 @@
 import datetime as dt
 import json
 
-import anthropic
-import httpx2
 import pytest
 
 from arxiv_radar import store
+from arxiv_radar.llm import LLMError
 from arxiv_radar.pipeline import run
 
 from conftest import make_paper, make_review
@@ -116,12 +115,9 @@ def test_digest_is_saved_when_no_paper_matches(config):
 def test_failed_run_leaves_papers_unseen_so_it_can_be_repeated(config):
     class BrokenReviewer:
         def review_all(self, papers):
-            request = httpx2.Request("POST", "https://api.test")
-            raise anthropic.AuthenticationError(
-                "bad key", response=httpx2.Response(401, request=request), body=None
-            )
+            raise LLMError("bad key")
 
-    with pytest.raises(anthropic.AuthenticationError):
+    with pytest.raises(LLMError):
         run(config, BrokenReviewer(), now=NOW, today=TODAY, fetcher=fetcher(matching("a")))
 
     assert store.load_seen(config.data_dir) == {}
