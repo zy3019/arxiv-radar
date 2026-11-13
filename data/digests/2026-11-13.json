@@ -1,0 +1,558 @@
+{
+  "date": "2026-11-13",
+  "fetched": 595,
+  "matched": 470,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.14925",
+        "title": "ToolTurns: Benchmarking LLM Agents in Multi-Turn Dialogue",
+        "abstract": "Tool-using language models are increasingly deployed in conversational settings, yet most large-scale tool-use benchmarks focus on isolated requests. We introduce ToolTurns, a benchmark of 2,620 problems spanning 1,827 tools and 11,004 API endpoints across 47 categories. Each dialogue begins with an intentionally underspecified request and continues through two context-dependent follow-ups, testing clarification, tool use, and retention of conversational context. We also introduce an open-source user simulator that reveals withheld context through dialogue and generates follow-up requests, with a checker--fixer pipeline for improving its turns. Across nine language models, the best agent resolves 69.6% of individual requests but completes only 39.8% of full dialogues. Under this evaluation protocol, every evaluated model receives lower success scores on follow-up requests than on the initial request, and dialogue-quality rubric scores and task success can rank models very differently. Paired turn-level evaluation shows that the checker--fixer reduces detected dialogue defects, and blind human evaluation favors the revised turns. ToolTurns provides a testbed for evaluating whether agents sustain task success across multi-turn dialogue with tools.",
+        "authors": [
+          "Milad Gholami",
+          "Brendan King",
+          "Jeffrey Flanigan"
+        ],
+        "categories": [
+          "cs.CL"
+        ],
+        "published": "2026-11-11T02:27:30Z",
+        "url": "https://arxiv.org/abs/2611.14925",
+        "pdf_url": "https://arxiv.org/pdf/2611.14925"
+      },
+      "lexical_score": 25.01,
+      "review": {
+        "score": 9,
+        "title_translated": "ToolTurns：在多轮对话中评测 LLM Agent 的基准",
+        "tldr": "ToolTurns 构建了一个多轮工具调用对话基准，每个对话从信息不完整的请求出发，包含两轮依赖上下文的追问，用以检验澄清、工具调用与对话上下文保持能力。",
+        "method": "构建覆盖 47 个类别、1,827 个工具、11,004 个 API 端点的 2,620 道题，并配套一个通过对话揭示隐藏上下文的开源用户模拟器，再用 checker–fixer 流程改进模拟器生成的追问轮次。",
+        "findings": "在九个语言模型上，表现最好的 Agent 能解决 69.6% 的单个请求，但仅完成 39.8% 的完整对话；所有被评测模型在追问轮次上的成功率都低于初始请求，且对话质量评分与任务成功率对模型的排序可能很不一致。",
+        "why_relevant": "该工作直接面向 Agent 工具调用与多轮规划的评测，并提供开源模拟器，契合研究者对可落地的 Agent 评测方法的需求。",
+        "tags": [
+          "Agent 评测",
+          "工具调用",
+          "多轮对话",
+          "基准数据集"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16627",
+        "title": "Folio: Recoverable Multi-Resolution Context Folding for Long-Horizon Language Agents",
+        "abstract": "Long-horizon language agents accumulate tool results and replies until the history no longer fits the context window. Current agents shrink this history by having a model summarize it, so each compaction rereads and rewrites the history it replaces, and cache-aware triggers decide when to compact while taking the size of the result as given. We present Folio, a context manager that records, folds, and recovers history through one set of handles. While the agent runs, Folio records three linked levels: a short turn note the model writes as part of its ordinary reply (L1), an event manifest of every call written by the runtime (L2), and the captured source records (L3). Because these views already exist, the runtime folds the context programmatically, selecting coarser views for older turns. The fold prints the handles that index L2 and L3, so recovery tools that read bounded pages, compute over full text in files, and keep findings in a persistent dossier reach the evidence the agent needs with little added input. The fold trigger prices an explicit landing point that includes the retained budget. On 75 LOCA-bench tasks with DeepSeek-V4-Pro behind every system, Folio solves 66 tasks against 54 for the same runtime with model-written compaction and 49-59 for Claude Code, Codex, and SoL-Pi, in about half their working time, at 2.4 times lower cost than that runtime; each fold takes a median of 0.6 seconds.",
+        "authors": [
+          "Yubo Ruan",
+          "Tao Peng",
+          "Jiao Zhang",
+          "Chuanguo Ma",
+          "Lei Xu",
+          "Han Zhou",
+          "Wenwu Wang",
+          "Xiafei Lv",
+          "Xingjie Zhou",
+          "Guiju Fan",
+          "Hao Wang",
+          "Fenghui Zhang",
+          "Mao Miao",
+          "Shuo Li"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-12T10:59:40Z",
+        "url": "https://arxiv.org/abs/2611.16627",
+        "pdf_url": "https://arxiv.org/pdf/2611.16627"
+      },
+      "lexical_score": 13.541,
+      "review": {
+        "score": 9,
+        "title_translated": "Folio：面向长程语言智能体的可恢复多分辨率上下文折叠",
+        "tldr": "Folio 提出一种可记录、折叠并恢复历史的多分辨率上下文管理器，让长程智能体在不丢失证据的前提下压缩上下文，在 LOCA-bench 上以更低成本和时间超过多种基线。",
+        "method": "运行时同步记录三层关联视图：模型在普通回复中写下的简短回合笔记（L1）、运行时写的事件清单（L2）和原始源记录（L3）；由于这些视图已存在，运行时按新旧程度程序化地折叠为更粗粒度视图，并在折叠处打印索引 L2/L3 的句柄，供有界分页读取、全文文件计算和持久化 dossier 等恢复工具使用；折叠触发条件显式计入保留预算的着陆点。",
+        "findings": "在 75 个 LOCA-bench 任务、所有系统均使用 DeepSeek-V4-Pro 的设置下，Folio 解决 66 个任务，而同一运行时配合模型撰写式压缩为 54 个，Claude Code、Codex、SoL-Pi 为 49–59 个；Folio 用时约为它们的一半，成本比该运行时低 2.4 倍，每次折叠中位耗时 0.6 秒。",
+        "why_relevant": "该工作直接针对长上下文管理与智能体工具结果累积问题，提出可恢复的上下文折叠机制，并给出系统级评测，正合研究者的长上下文、Agent 工具调用与评测关注点。",
+        "tags": [
+          "长上下文管理",
+          "Agent 上下文折叠",
+          "工具调用",
+          "长程智能体评测"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15268",
+        "title": "Knowledge in the Harness, Reliability in the Weights: Teacher-Free Co-Evolution of an LLM Agent",
+        "abstract": "Small open models suit private customer-service deployments but trail frontier models in two ways: they miss what the written policy requires in a given situation, and they act inconsistently on what they know. We study whether such a model can close both gaps from its own deployment logs and their reference outcomes, without a stronger teacher model. Our starting point is a Gemma 4 12B agent that reads its domain policy from on-demand skills rather than from its system prompt. In each round, the deployed system serves a fresh batch of tasks; the base model diagnoses failed conversations and writes rules into the skills, and a rule survives only if it passes code checks, counterexample self-review, a paired retest, and a noise-calibrated validation gate. Reinforcement learning (GRPO) then trains a LoRA adapter on complete multi-turn, tool-using conversations. On the retail and airline domains of $τ^2$-bench, without training or selecting on official tasks, the agent after two rounds improves on this starting point by 12.5 pass$^1$ points in retail and 19.5 in airline, and by 18.4 and 22.0 pass$^4$ points. It also exceeds the benchmark's reference agent, which runs the same model with the whole policy in its system prompt, by 11.8 and 8.0 pass$^1$ points and by 22.8 and 16.0 pass$^4$ points, closing most of the gap to three frontier models under the same protocol. A $2\\times2$ ablation shows that the rules rescue tasks the agent never solved and carry policy knowledge that RL with the rules in context does not internalize, whereas the trained weights make solved tasks reliable.",
+        "authors": [
+          "Yujia Zhang",
+          "Xinqi Ren",
+          "Shixiong Zhou",
+          "Jia Meng"
+        ],
+        "categories": [
+          "cs.CL",
+          "cs.AI",
+          "cs.LG"
+        ],
+        "published": "2026-11-11T09:56:09Z",
+        "url": "https://arxiv.org/abs/2611.15268",
+        "pdf_url": "https://arxiv.org/pdf/2611.15268"
+      },
+      "lexical_score": 12.854,
+      "review": {
+        "score": 9,
+        "title_translated": "驾驭手册中的知识，权重中的可靠性：LLM Agent 的无教师协同进化",
+        "tldr": "该论文提出一种无需更强教师模型的协同进化方法，让小型开源模型从自身部署日志中同时学习显式的策略规则与隐式的可靠行为，在 τ²-bench 的零售与航空任务上显著提升。",
+        "method": "以 Gemma 4 12B agent 为起点，通过按需技能文件读取领域策略；每轮由基础模型诊断失败对话并写入规则，规则须通过代码检查、反例自审、配对重测与噪声校准的验证门；随后用 GRPO 在完整多轮工具调用对话上训练 LoRA adapter。",
+        "findings": "不使用官方任务训练或选择，两轮后在 τ²-bench 零售域提升 12.5 pass^1 点、航空域提升 19.5 点，pass^4 分别提升 18.4 与 22.0 点；超过以完整策略置于 system prompt 的参考 agent 达 11.8/8.0 pass^1 点，缩小了与三个前沿模型在同协议下的差距。2×2 消融表明规则能解决模型从未解过的任务并承载 RL 在上下文中无法内化的策略知识，而训练后的权重使已解任务更可靠。",
+        "why_relevant": "直接对应研究者关注的 Agent 工具调用与规划、长上下文/策略注入方式，以及基于部署日志的评测与改进闭环，且有 τ²-bench 上的开源可复现实验。",
+        "tags": [
+          "LLM Agent",
+          "τ²-bench",
+          "GRPO",
+          "工具调用",
+          "技能规则"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16590",
+        "title": "AstroMemBench: A Benchmark for Memory Systems in Embodied Spacecraft Agents",
+        "abstract": "Long-term spacecraft autonomy requires embodied agents to use operational history under communication delays, time-critical operations, environmental uncertainty, complex physical interactions, power and computational constraints, and safety and reliability requirements. We introduce AstroMemBench and a Scenario-Challenge-Capability design method that maps these requirements to executable memory tests. The benchmark covers 16 memory subchallenges through 140 templates and 2240 instances across nine tasks in planetary surface operations, on-orbit servicing, and deep-space exploration. A deterministic environment scores actions for task completion, state changes, safety, and resource use. Ablations under nine conditions show that the benchmark is sensitive to how accurately agents recover and use historical information and to differences in memory-system design. Main experiments compare six configurations. Mem0, Chain-of-Memory, LightMem, and retrieval-augmented generation (RAG) improve same-session mean scores over native Pi Agent, with no clear advantage of the three memory systems over RAG. After a session restart, Mem0 outperforms RAG by 12.25 points. Benefits favor instruction retention and result reuse over ongoing state tracking and energy reservation. AstroMemBench supports the design, development, and selection of memory systems for embodied spacecraft agents. AstroMemBench 1.0 and its evaluation code are publicly available: https://github.com/flyingView/AstroMemBench-v1.",
+        "authors": [
+          "You Wu",
+          "Guhong Zhang",
+          "Hongwei Li",
+          "Xinyue Hong",
+          "Yuan Jia"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.RO"
+        ],
+        "published": "2026-11-12T10:23:15Z",
+        "url": "https://arxiv.org/abs/2611.16590",
+        "pdf_url": "https://arxiv.org/pdf/2611.16590"
+      },
+      "lexical_score": 30.481,
+      "review": {
+        "score": 8,
+        "title_translated": "AstroMemBench：具身航天器代理记忆系统基准",
+        "tldr": "该论文提出 AstroMemBench，一个面向具身航天器代理记忆系统的基准，用 16 项记忆子挑战、140 个模板和 2240 个实例在九项太空任务上评测不同记忆方案。",
+        "method": "提出 Scenario-Challenge-Capability 设计方法，把航天自主性需求映射为可执行记忆测试；用确定性环境从任务完成、状态变化、安全与资源使用四方面给动作打分，并比较六种配置（Mem0、Chain-of-Memory、LightMem、RAG、原生 Pi Agent 等）。",
+        "findings": "在同会话中，Mem0、Chain-of-Memory、LightMem 与 RAG 均优于原生 Pi Agent，但三种记忆系统相对 RAG 无明显优势；会话重启后 Mem0 比 RAG 高 12.25 分；收益更多体现在指令保持与结果复用，而非持续状态跟踪与能量预留。",
+        "why_relevant": "该工作直接评测长上下文/记忆系统并用 RAG 作对照，属于该研究者关注的 Agent 记忆、RAG 与系统评测方向，且代码开源。",
+        "tags": [
+          "记忆系统",
+          "RAG",
+          "Agent 评测",
+          "长上下文"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15729",
+        "title": "DISCERN: Preserve at Write, Resolve at Read for Persistent LLM-Agent Memory",
+        "abstract": "Enterprise agents accumulate memory across dozens of sessions in which facts contradict, get superseded, and blur as similarly named entities collide in embedding space. The field treats this as a retrieval problem; we show it is not. On ENT-310, a synthetic enterprise sales-agent memory benchmark of 310 queries (210 answerable, 100 unanswerable), a vanilla Retrieval-Augmented Generation (RAG) reader over a memory store already matches strong memory systems on the recall pillars. Retention and currency are near-saturated, roughly 0.93 to 0.98 for every competent system, so recall is essentially solved. What remains unsolved is resolution: which entity a query refers to, which time-state is current, and whether to commit an answer at all or decline when evidence is insufficient. We propose DISCERN (DISambiguation and Cross-session Episodic memoRy Navigation), an agent-memory framework built on a single rule: preserve at write, resolve at read. At write time DISCERN builds a strictly additive bi-temporal provenance graph that never merges confusable entities and never drops superseded values. At read time a zero-LLM tool surface drives an agentic loop that navigates this graph and commits exactly one of four gated terminal actions. A four-judge LLM-as-a-Judge council scores two axes: answer correctness on answerable questions, and the answer-versus-abstain decision as a classification problem. On ENT-310, DISCERN is the best-calibrated system on abstention (F1 0.924 versus at most 0.802 across eight baselines) and leads macro answer correctness under equal pillar weighting (0.861 versus 0.806 for the strongest baseline), a lead driven by entity resolution (0.800, where no baseline exceeds 0.40). Applied with zero tuning to the full LoCoMo corpus, the same pipeline again leads macro answer correctness (0.663 versus 0.638) and stays among the best-calibrated on false-premise abstention.",
+        "authors": [
+          "Chirag Ahuja",
+          "Vladislav Tanov",
+          "Ramcharan Kakarla",
+          "Jonathan Taws"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-11T17:06:07Z",
+        "url": "https://arxiv.org/abs/2611.15729",
+        "pdf_url": "https://arxiv.org/pdf/2611.15729"
+      },
+      "lexical_score": 26.404,
+      "review": {
+        "score": 8,
+        "title_translated": "DISCERN：写入时保留、读取时解析的持久化 LLM Agent 记忆",
+        "tldr": "DISCERN 把跨会话 Agent 记忆的难点从“召回”重新定义为“解析”，用写入时只增不改的双时态溯源图加读取时的零 LLM 工具式 agentic 循环，在自建的 ENT-310 和 LoCoMo 上提升了答案正确率与拒答校准。",
+        "method": "写入阶段构建严格增量的双时态溯源图，不合并易混淆实体、不丢弃被取代的旧值；读取阶段由一个不含 LLM 的工具接口驱动 agentic 循环在图上导航，并只能提交四种受门控的终止动作之一；用四个 LLM 裁判组成评审团，分别评答案正确性和“作答 vs 拒答”的分类表现。",
+        "findings": "在 ENT-310（310 条查询，其中 210 条可答、100 条不可答）上，拒答的 F1 为 0.924，而八个基线最高只有 0.802；等权宏观答案正确率为 0.861，最强基线为 0.806，这一优势主要来自实体解析（0.800，没有基线超过 0.40）。不做调优直接用于完整 LoCoMo 语料时，同样是宏观答案正确率最高（0.663 vs 0.638），并且在虚假前提拒答上保持较好校准。",
+        "why_relevant": "它直接处理 RAG 与 Agent 长期记忆中的跨会话冲突、实体消歧和何时拒答，并同时给出正确性与拒答校准两类评测，正对应该研究者对 RAG、Agent 记忆和系统评测的关注。",
+        "tags": [
+          "Agent 记忆",
+          "RAG",
+          "实体消歧",
+          "拒答校准"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16425",
+        "title": "RMIT-ADM+S at TREC RAG 2026: Research Agents, Retriever Ablations, and Open-Weight Replication",
+        "abstract": "We describe the RMIT-ADM+S team's participation in the TREC 2026 Retrieval-Augmented Generation (RAG) track using the ClimbMix corpus. We submitted seven research-agent runs using proprietary OpenAI and open-weight models, exploring different retrieval strategies, writer models, and agent workflows. Pre-submission ablations identified writer selection and adjacent-chunk expansion as the main factors affecting answer quality. In the official NIST evaluation, six of seven runs exceeded the track median across all three rubric/nugget collections. Our best-performing run, brief-hybrid, achieved the highest all-item coverage among our submissions and tied the track maximum (0.892) for Batch-1 vital coverage. Human side-by-side preferences differed across evaluation batches: the open-weight owa-glm5 led Batch 1 despite lower automated coverage, while sol-research-first led Batch 2. These findings highlight differences between automated coverage measures and human preferences, as well as the potential of lower-cost open-weight models for research-agent systems.",
+        "authors": [
+          "Oleg Zendel",
+          "Kun Ran",
+          "Chenglong Ma",
+          "Nguyen Khoi Vo",
+          "Shuai Wang"
+        ],
+        "categories": [
+          "cs.IR",
+          "cs.AI",
+          "cs.CL"
+        ],
+        "published": "2026-11-12T07:34:28Z",
+        "url": "https://arxiv.org/abs/2611.16425",
+        "pdf_url": "https://arxiv.org/pdf/2611.16425"
+      },
+      "lexical_score": 25.7,
+      "review": {
+        "score": 8,
+        "title_translated": "RMIT-ADM+S 在 TREC RAG 2026 的参赛报告：研究型 Agent、检索器消融与开源权重模型复现",
+        "tldr": "该文报告了 RMIT-ADM+S 团队在 TREC 2026 RAG track 上的七组 research-agent 提交，比较检索策略、writer 模型与 agent workflow，并揭示自动覆盖度指标与人类偏好之间的分歧。",
+        "method": "基于 ClimbMix 语料构建多个 research-agent run，混用 OpenAI 专有模型与开源权重模型，探索不同检索策略、writer 模型与 agent workflow；提交前做了消融实验。",
+        "findings": "消融显示 writer 选择与相邻 chunk 扩展是影响答案质量的主要因素；官方 NIST 评测中七个 run 有六个在三个 rubric/nugget 集合上超过 track 中位数，最佳 run brief-hybrid 在 Batch-1 vital coverage 上并列 track 最高（0.892）。人工并排偏好在不同评测批次间不一致：Batch 1 中开源权重的 owa-glm5 领先，Batch 2 中 sol-research-first 领先，且自动覆盖度与人类偏好存在差异。",
+        "why_relevant": "直接对应研究者关注的 RAG、agent 工作流与系统评测，尤其涉及自动指标与人类偏好不一致这一评测核心问题，并涉及开源权重模型的落地复现。",
+        "tags": [
+          "RAG",
+          "research agent",
+          "TREC 评测",
+          "开源权重模型"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15538",
+        "title": "Faithful in Steps: Improving Generalization and Citation in RAG via Query Decomposition",
+        "abstract": "Retrieval-augment generation is a prevalent strategy to mitigate hallucinations of LLMs. The attributable RAG (RAGQ) generates quotes for its answers. The quotes indicate which input contexts support the RAG to derive the answers, enhancing the answer's verifiability and trustworthiness. However, existing RAGQs exhibit significant degradation when dealing with questions that require multi-hop reasoning and multi-modal understanding, suffering from over-citation, implicit entity identification failure, and poor generalization. In this paper, we propose a novel RAGQ framework, namely QDRAG. QDRAG breaks down the input question into atomic subquestions to identify the implicit entities. Then, the reranker prunes context distractors to eliminate the downstream over-citation. To facilitate query decomposition, we propose two zero-shot approaches: QD-C and QD-R, which guide the QD MLLM to decompose the question based on context knowledge and retrieval rewards, respectively. One interesting finding is that finetuning on the QD task shows better generalizability compared to directly finetuning on the downstream RAGQ task. Experiments on four multi-modal QA benchmarks demonstrate QDRAG's efficacy in grounding answers and generating faithful citations. The framework significantly outperforms all the baselines on both in-domain and out-of-domain tests, even surpassing Gemini-Pro.",
+        "authors": [
+          "Yue Liu",
+          "Zhongying Ru",
+          "Shimin Di",
+          "Jipeng Zhang",
+          "Ruiyuan Zhang",
+          "Xiaofang Zhou"
+        ],
+        "categories": [
+          "cs.CL",
+          "cs.AI"
+        ],
+        "published": "2026-11-11T14:22:09Z",
+        "url": "https://arxiv.org/abs/2611.15538",
+        "pdf_url": "https://arxiv.org/pdf/2611.15538"
+      },
+      "lexical_score": 20.472,
+      "review": {
+        "score": 8,
+        "title_translated": "步步忠实：通过查询分解提升 RAG 的泛化性与引用质量",
+        "tldr": "论文提出 QDRAG，一个面向可归因 RAG 的框架，通过把问题拆成原子子问题并结合 reranker 剪枝上下文，来解决多跳与多模态问答中的过度引用、隐式实体识别失败和泛化差问题。",
+        "method": "将输入问题分解为原子子问题以识别隐式实体，再用 reranker 剪除干扰上下文以减少下游过度引用；同时提出两种零样本查询分解方式 QD-C（基于上下文知识）和 QD-R（基于检索奖励）。",
+        "findings": "在四个多模态 QA 基准上，QDRAG 在答案 grounding 和忠实引用生成上显著优于所有基线，在域内与域外测试中均超过 Gemini-Pro；作者还发现，在查询分解任务上微调比直接在下游 RAGQ 任务上微调具有更好的泛化性。",
+        "why_relevant": "直接涉及 RAG 的检索与引用忠实性、查询分解策略和系统评测，属于该研究者关注的 RAG 应用工程方向，但偏多模态场景。",
+        "tags": [
+          "RAG",
+          "查询分解",
+          "引用归因",
+          "多模态问答"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15600",
+        "title": "MemCredit: From Relevance to Utility for Decision-Time Memory in Long-Horizon Web Agents",
+        "abstract": "Large language model (LLM) agents increasingly operate over long Web interaction histories, making memory management critical for reliable and efficient decision making. Existing methods primarily optimize storage, retrieval, or compression, but the memories most semantically relevant to the current state are not necessarily those that most improve the agent's action. We introduce MemCredit, a decision-centric memory framework that shifts memory selection from semantic relevance to decision utility. MemCredit estimates the state-, reference-context-, and policy-conditional marginal contribution of individual memories through controlled counterfactual interventions, and distills these intervention-derived credits into a lightweight utility estimator. At inference time, semantic relevance is used only for high-recall candidate generation, while predicted utility arbitrates which memories are retained under a fixed token budget, without modifying the underlying agent policy or requiring additional environment interaction. We evaluate MemCredit on ALFWorld and WebShop against representative memory baselines. On ALFWorld, MemCredit achieves 86.57 SR@50 under a 500-token historical-memory budget, compared with 65.67% for BM25 retrieval. Counterfactual analysis further shows that memory utility is sparse, strongly state dependent, and poorly captured by semantic relevance. These results suggest that decision utility provides a more effective principle than relevance alone for long-horizon agent memory management.",
+        "authors": [
+          "Quanjiang Guo",
+          "Sijie Wang",
+          "Qianyang Zhu",
+          "Ben Zhang",
+          "Jinchuan Zhang",
+          "Ke Yan",
+          "Zhao Kang"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-11T15:17:38Z",
+        "url": "https://arxiv.org/abs/2611.15600",
+        "pdf_url": "https://arxiv.org/pdf/2611.15600"
+      },
+      "lexical_score": 19.482,
+      "review": {
+        "score": 8,
+        "title_translated": "MemCredit：从相关性到效用——长程 Web Agent 的决策时记忆",
+        "tldr": "MemCredit 提出以决策效用而非语义相关性来选择 LLM Agent 的历史记忆，在固定 token 预算下用反事实干预蒸馏出的轻量效用估计器筛选记忆，并在 ALFWorld 与 WebShop 上验证。",
+        "method": "通过受控反事实干预估计每条记忆在给定状态、参考上下文和策略下的边际贡献，将这些干预得到的 credit 蒸馏为轻量效用估计器；推理时语义相关性只用于高召回候选生成，再由预测效用决定在固定 token 预算内保留哪些记忆，且不修改底层 agent 策略、不增加环境交互。",
+        "findings": "在 ALFWorld 500-token 历史记忆预算下达到 86.57 SR@50，而 BM25 检索为 65.67%；反事实分析显示记忆效用稀疏、高度依赖状态，且难以被语义相关性刻画。",
+        "why_relevant": "该工作直接针对 Agent 长程记忆与上下文预算管理这一应用工程问题，提出可落地的记忆选择机制，与关注长上下文和 Agent 规划的研究者高度相关。",
+        "tags": [
+          "Agent memory",
+          "long-horizon agents",
+          "context management",
+          "ALFWorld/WebShop"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16174",
+        "title": "JudgeMix: Judge-Guided Mixed-Rollout Data Synthesis for LLM Agents",
+        "abstract": "Supervised fine-tuning (SFT) on expert trajectories is a standard paradigm for training LLM agents. However, it suffers from a well-known training-inference distribution mismatch, calling for target-aware data synthesis strategies that ground the training data in the target model's native state distribution. To bridge this gap, emerging approaches incorporate the expert either to guide mixed rollouts alongside the target model, or to provide dense step-wise supervision. Nonetheless, existing methods apply expert assistance blind to the target model's inherent behavior: they either disrupt the rollout using sub-optimal random intervention heuristics, or they enforce indiscriminate uniform supervision that unnecessarily overwrites the model's already-correct actions. We introduce JudgeMix, a judge-guided data synthesis framework that dynamically interleaves the target model and expert based on step-wise semantic evaluations. JudgeMix queries expert guidance precisely when the target model struggles, ensuring high trajectory success rates while keeping the state distribution aligned with the target model. It additionally uses the judge evaluation to reweight expert supervision on different steps, preserving model's inherent valid behavior while correcting its errors. On two agentic tool-use benchmarks, AppWorld and AutomationBench, JudgeMix demonstrates consistent superior performance to existing methods, with improvements up to 10 pass@1 points.",
+        "authors": [
+          "Cheng-Yu Hsieh",
+          "Ting-Yao Hu",
+          "Sanjoy Chowdhury",
+          "Oncel Tuzel",
+          "Raviteja Vemulapalli"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.AI",
+          "cs.CL"
+        ],
+        "published": "2026-11-12T02:03:23Z",
+        "url": "https://arxiv.org/abs/2611.16174",
+        "pdf_url": "https://arxiv.org/pdf/2611.16174"
+      },
+      "lexical_score": 18.73,
+      "review": {
+        "score": 8,
+        "title_translated": "JudgeMix：面向 LLM Agent 的评判器引导混合采样数据合成",
+        "tldr": "提出 JudgeMix，用逐步语义评判动态调度目标模型与专家模型交替采样并加权专家监督，缓解 SFT 中的训练-推理分布失配问题。",
+        "method": "框架先用评判器对目标模型每一步做语义评估，仅在目标模型表现不佳时引入专家引导，使轨迹状态分布贴近目标模型；同时用评判结果对专家监督按步骤重新加权，避免覆盖模型本就正确的行为。",
+        "findings": "在 AppWorld 和 AutomationBench 两个 agentic tool-use 基准上一致优于现有方法，pass@1 最高提升 10 个点。",
+        "why_relevant": "直接服务于 LLM Agent 的工具使用训练与落地，涉及数据合成与评测基准，契合该研究者对 Agent 工具调用与评测的兴趣。",
+        "tags": [
+          "LLM Agent",
+          "工具调用",
+          "数据合成",
+          "监督微调"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16493",
+        "title": "ReA-Bench: Benchmarking Responsible Agent Auditing",
+        "abstract": "As agents perform tasks autonomously in local and cloud environments, auditing their execution trajectories can help service providers identify risks and improve agent harnesses and foundation models. Our analysis of production and red-team trajectories shows that some risks are repeatedly missed across auditing configurations. Overall recall obscures which risks are missed and whether higher recall comes with more false positives on legitimate behavior. Existing benchmarks offer limited insight into these failures. Generated trajectories can contain inconsistent tool calls and responses, conspicuous risky actions, or repetitive attack patterns. Grouping results by risk type also makes it difficult to tell whether auditors overlooked evidence, accepted an unsupported conclusion, or lacked information needed to make a judgment. We introduce ReA-Bench, a diagnostic benchmark for auditing responsible agent behavior. It organizes auditing challenges into six tiers: internal safety knowledge, contradictions within trajectories, evidence retrieval in long contexts, verification of sources and reasoning, indirect steering, and missing information. It includes challenging benign cases in which actions resemble risky ones but are consistent with the task and its authorization. It also provides paired trajectory versions to test whether auditors detect the same risks more reliably when the trajectory is shortened or missing information is supplied. Most samples are drawn from real production trajectories, with scenarios manually selected and adapted to preserve realistic tasks and risks that could plausibly arise during execution.",
+        "authors": [
+          "Zipeng Ye",
+          "Shenyu Dai",
+          "Yong Xie",
+          "Kun Wang",
+          "Jiyang Guan",
+          "Zhikai Chen",
+          "Jiaqi Weng",
+          "Jialing Tao",
+          "Hui Xue"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-12T09:01:24Z",
+        "url": "https://arxiv.org/abs/2611.16493",
+        "pdf_url": "https://arxiv.org/pdf/2611.16493"
+      },
+      "lexical_score": 16.713,
+      "review": {
+        "score": 8,
+        "title_translated": "ReA-Bench：负责任 Agent 审计的基准评测",
+        "tldr": "ReA-Bench 是一个诊断型基准，用于评测对 Agent 执行轨迹的负责任行为审计能力，帮助识别现有审计配置反复漏掉的风险。",
+        "method": "该基准将审计挑战划分为六个层级：内部安全知识、轨迹内部矛盾、长上下文中的证据检索、来源与推理验证、间接引导、信息缺失；并包含行动看似有风险但与任务及授权一致的困难良性案例，以及成对的轨迹版本，用于检验轨迹被缩短或补齐缺失信息后审计可靠性的变化。大部分样本取自真实生产轨迹，场景经人工挑选和改写。",
+        "findings": "对生产和红队轨迹的分析显示，部分风险在多种审计配置下被反复漏检；总体召回率掩盖了具体漏掉哪些风险，以及更高召回是否伴随对合法行为的更多误报。现有基准对这些失败模式揭示有限。",
+        "why_relevant": "该论文直接对应研究者对 Agent 评测的兴趣，尤其关注如何用真实生产轨迹和长上下文证据检索来诊断审计系统漏检与误报的问题。",
+        "tags": [
+          "Agent 审计",
+          "基准评测",
+          "长上下文",
+          "安全风险"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15467",
+        "title": "AutoOntic: Automatic Ontology Induction from Text for Knowledge Graph Construction",
+        "abstract": "Graph-based retrieval-augmented generation depends on the quality of the knowledge graph (KG) it retrieves over, yet schema-free LLM-based extraction pipelines typically produce flat graphs: deduplicated entities and relations with no type hierarchy and no domain/range constraints. We present AutoOntic, a pipeline that automatically constructs an ontology from text by canonicalizing open-vocabulary entity types and relations, inducing a hierarchy over the canonicalized types, and mining relation-level domain and range constraints. Its hierarchy induction procedure prioritizes types using corpus-derived relation-argument profiles and places them through local, LLM-adjudicated parent/child checks, allowing newly inserted types to trigger reassignment of existing parent-child links. The resulting hierarchy constrains entity deduplication and supports the induction of relation-level domain/range constraints. For intrinsic evaluation, we introduce a reference-based protocol that classifies induced ontology types as exact, broader, narrower, or unrelated to reference domain and range classes. On the Wikidata-TekGen and DBpedia-WebNLG subsets of Text2KGBench, over 90% of AutoOntic's induced endpoint types are semantically aligned with the reference classes across two LLM backbones: about half match exactly, while most remaining differences concern granularity. On MINE, knowledge graphs organized using an ontology built by AutoOntic achieve 88% retrieval accuracy. AutoOntic is available at https://github.com/screemix/AutoOntic.",
+        "authors": [
+          "Alla Chepurova",
+          "Aydar Bulatov",
+          "Mikhail Burtsev",
+          "Yuri Kuratov"
+        ],
+        "categories": [
+          "cs.CL",
+          "cs.AI",
+          "cs.LG"
+        ],
+        "published": "2026-11-11T13:37:36Z",
+        "url": "https://arxiv.org/abs/2611.15467",
+        "pdf_url": "https://arxiv.org/pdf/2611.15467"
+      },
+      "lexical_score": 16.215,
+      "review": {
+        "score": 8,
+        "title_translated": "AutoOntic：从文本自动归纳本体以构建知识图谱",
+        "tldr": "该论文提出 AutoOntic 流水线，从文本自动归纳本体（类型层级与关系 domain/range 约束），用于提升基于图的 RAG 所依赖的知识图谱质量。",
+        "method": "对开放词表的实体类型和关系做规范化，基于语料中关系-论元画像对类型排序，并通过 LLM 裁决的局部父子检查归纳类型层级，再用该层级约束实体去重并挖掘关系级 domain/range 约束。",
+        "findings": "在 Text2KGBench 的 Wikidata-TekGen 与 DBpedia-WebNLG 子集上，两种 LLM 骨干下超过 90% 的归纳端点类型与参考类语义对齐，约一半精确匹配，其余差异多属粒度问题；在 MINE 上，使用 AutoOntic 本体组织的知识图谱达到 88% 的检索准确率。",
+        "why_relevant": "直接服务于 RAG 与知识图谱构建，提供开源代码，并给出了可落地的本体归纳与评测协议，契合该研究者对检索增强生成与系统评测的关注。",
+        "tags": [
+          "RAG",
+          "知识图谱构建",
+          "本体归纳",
+          "GraphRAG"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.17007",
+        "title": "Skill Adapter: Personalized Modification and Online Routing of General-Purpose Skills",
+        "abstract": "Large language model (LLM) agents use external skills to reuse task procedures and experience with tools. General-purpose skills describe shared execution procedures, while specific tool choices, operating practices, and output requirements vary across users. In long-horizon tasks, subgoals, available inputs, and environmental states change as execution progresses. Agents must select currently applicable skills from an expanding skill pool and prepare candidates for subsequent steps. We propose Skill Adapter, which enables personalized modification and online routing of general-purpose skills. The system distills local adjustments from user requirements and execution feedback and stores them as Adapters linked to general-purpose skills. The routing agent selects general-purpose skills and applicable Adapters based on the current subtask, execution progress, and environmental feedback, incrementally maintaining a task-level online skill library that the main LLM reads on demand. The system preloads candidates for subsequent nodes and rechecks their applicability once actual inputs are determined. Reinforcement learning optimizes the two types of decisions using modification gains and routing outcomes, respectively. We evaluate Skill Adapter on ALFWorld, WebShop, and SkillsBench. Compared with SkillRL, it improves task success rates by an average of 11.43 percentage points and reduces mean execution time on all three benchmarks. Skill Adapter retains its performance advantage when the skill pool grows to 1,000 skills.",
+        "authors": [
+          "Qijia Zhuang",
+          "Yanyi Gou",
+          "Wenbin Ma",
+          "Yuxiang Ren"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-12T16:05:23Z",
+        "url": "https://arxiv.org/abs/2611.17007",
+        "pdf_url": "https://arxiv.org/pdf/2611.17007"
+      },
+      "lexical_score": 15.88,
+      "review": {
+        "score": 8,
+        "title_translated": "Skill Adapter：通用技能的个性化修改与在线路由",
+        "tldr": "该论文提出 Skill Adapter 系统，把用户需求与执行反馈中提炼出的局部调整存为挂在通用技能上的 Adapter，并由路由 agent 按当前子任务与环境反馈在线挑选技能与 Adapter，以提升长程任务的执行效果。",
+        "method": "系统从用户需求与执行反馈中蒸馏局部调整并作为 Adapter 关联到通用技能；路由 agent 依据当前子任务、执行进度和环境反馈选择通用技能与适用的 Adapter，增量维护任务级在线技能库供主 LLM 按需读取，并预加载后续节点候选、在实际输入确定后复核适用性；两类决策分别用修改收益和路由结果做强化学习优化。",
+        "findings": "在 ALFWorld、WebShop 和 SkillsBench 上，相比 SkillRL 任务成功率平均提升 11.43 个百分点，并在三个基准上都降低了平均执行时间；技能池扩展到 1000 个技能时仍保持性能优势。",
+        "why_relevant": "该工作直接面向 Agent 的工具/技能选择与规划，并涉及在线技能路由与个性化适配，与研究者关注的 Agent 工具调用与规划高度契合。",
+        "tags": [
+          "Agent 技能路由",
+          "工具调用",
+          "个性化适配",
+          "强化学习"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.16526",
+        "title": "Lost in Delegation: Studying the Effectiveness of Task Orchestration in Generative Search",
+        "abstract": "LLMs have quickly evolved from models used in isolation to agentic systems that delegate tasks to external tools and other LLMs to solve complex assignments. This agentic augmentation has led to impressive capability gains. However, when and how delegation improves performance remains poorly understood. For example, it is unclear whether delegation helps when tasks involve post-cutoff information that the orchestrating LLM cannot reliably resolve from its own knowledge. In this work, we use purpose-built datasets with pre- and post-cutoff splits to compare various delegation modes. We find that delegation provides no consistent accuracy improvement over non-delegated setups, with effects varying across models and tasks. When tasks involve knowledge unavailable to the orchestrator, delegation can substantially degrade accuracy, while direct tool use with the same LLM performs much better. Our analysis identifies distorted delegated queries, inefficient tool use, and failures to preserve and use information between agents as recurring failure modes. These findings suggest that effective orchestration requires both well-calibrated delegation decisions and effective exchange of information between agents.",
+        "authors": [
+          "Tamara Stojanovska",
+          "Elisabeth Kirsten",
+          "Leon Swazinna",
+          "Muhammad Bilal Zafar"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "published": "2026-11-12T09:25:33Z",
+        "url": "https://arxiv.org/abs/2611.16526",
+        "pdf_url": "https://arxiv.org/pdf/2611.16526"
+      },
+      "lexical_score": 14.78,
+      "review": {
+        "score": 8,
+        "title_translated": "迷失在委派中：探究生成式搜索中任务编排的有效性",
+        "tldr": "论文通过构建包含 cutoff 前后信息划分的定制数据集，系统比较多种委派模式，考察 LLM 智能体在生成式搜索中委派任务给工具或其他模型是否真能提升效果。",
+        "method": "使用专门构建的数据集，按知识截止前后切分，对比多种委派（delegation）模式与非委派基线，并分析失败案例。",
+        "findings": "委派相比非委派设置在准确率上没有一致的提升，效果随模型和任务而异；当任务涉及编排者不具备的知识时，委派会显著降低准确率，而同一 LLM 直接使用工具的表现好得多；主要失败模式包括委派查询失真、工具使用低效以及智能体间信息保存与利用失败。",
+        "why_relevant": "直接触及 Agent 的任务编排、工具调用与规划以及评测方法，正是该研究者关注的核心方向，且对 RAG/工具使用系统的落地设计有警示意义。",
+        "tags": [
+          "Agent 编排",
+          "工具调用",
+          "生成式搜索",
+          "评测"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.14765",
+        "title": "SynthCorp: A Platform for Creating Benchmarks for Data Agents",
+        "abstract": "Current benchmarks for LLM-driven data agents saturate quickly and cannot target specific capabilities. We present SynthCorp, a platform that creates customizable data estates and benchmarks by simulating how business events produce and modify corporate data over time. Each data estate combines relational databases, a document store, and a data catalog, paired with evaluation tasks and executable gold programs. First, given a scenario and target complexity dimensions, SynthCorp synthesizes reusable event types and compiles each into a program over predefined simulation primitives. Second, SynthCorp schedules event instances on a virtual calendar, interleaving routine and disruption events so that tables, documents, and catalog entries remain consistent. Third, SynthCorp executes the calendar to materialize the data estate and records every operation in a simulation log. Fourth, SynthCorp generates analytical tasks and derives verified gold programs from the log. We use SynthCorp to generate initial evaluation benchmarks comprising seven data estates (up to 1K operational tables) and 256 tasks across five domains. The data estates pass deterministic pipeline checks (such as foreign-key violations, undeclared writes, recurrence violations, and database execution failures) with a near-zero error rate, introduce cross-asset complexities, and cover all requested dimensions. Evaluating three models across four data-context settings shows that the benchmarks separate data contexts and model tiers. Auditing candidate queries against causal provenance in the simulation log verifies gold programs without manual annotation, including on multi-event composite tasks that expose reasoning failures in state-of-the-art agents. We hope the community uses SynthCorp to generate more challenging and useful data estates and benchmarks that foster the development of enterprise data agents.",
+        "authors": [
+          "Jiani Zhang",
+          "Manav Garg",
+          "Eugenie Lai",
+          "Cheng Zhen",
+          "Eva Sharma",
+          "Yang Pan",
+          "Yaming Lin",
+          "Alon Halevy"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.DB"
+        ],
+        "published": "2026-11-10T21:43:12Z",
+        "url": "https://arxiv.org/abs/2611.14765",
+        "pdf_url": "https://arxiv.org/pdf/2611.14765"
+      },
+      "lexical_score": 13.068,
+      "review": {
+        "score": 8,
+        "title_translated": "SynthCorp：为数据 Agent 构建基准测试的平台",
+        "tldr": "SynthCorp 通过模拟企业事件随时间生成并修改数据的过程，自动合成可定制的关系数据库、文档库与数据目录组合及配套评测任务，用于快速生成难度可控的数据 Agent 基准。",
+        "method": "平台先根据场景与目标复杂度维度合成可复用的事件类型并编译为仿真原语程序，在虚拟日历上调度常规与扰动事件以保证跨资产一致性；执行日历物化数据资产并记录仿真日志，再从日志生成分析任务和经因果溯源验证的 gold 程序。",
+        "findings": "生成的初始基准包含 7 个数据资产（最多约 1K 张业务表）和跨 5 个领域的 256 个任务，流水线确定性校验（外键违规、未声明写入、重复违规、数据库执行失败等）错误率接近零；三个模型在四种数据上下文设置下的评测显示基准能区分数据上下文与模型层级，且在多事件复合任务上暴露了当前最优 Agent 的推理失败。",
+        "why_relevant": "该工作面向 Agent 任务构造与评测基准的自动化生成，与研究者关注的 Agent 规划、工具调用及系统评测方法直接相关。",
+        "tags": [
+          "Agent 评测",
+          "基准生成",
+          "数据 Agent",
+          "合成数据"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.14924",
+        "title": "Edge-Native Multimodal RAG: Hardware-Aware Quantization and Architectural Optimization for Consumer GPUs",
+        "abstract": "Deployment of retrieval-augmented generation (RAG) for Edge-AI is constrained by memory and bandwidth limitations. A standard 7B parameter model consumes 14 GB Video Random Access Memory (VRAM) in half-precision (FP16), precluding co-location of vector indices and Key-Value (KV) caches. This paper presents an engineering integration and empirical evaluation of a multimodal RAG framework optimized for consumer-grade Turing hardware (e.g., NVIDIA Tesla T4). Our system-level analysis identifies a critical trade-off: while generative pre-trained transformer quantization (GPTQ) offers superior throughput (51.6 tok/s), it exhibits significant context instability at 2048+ tokens on Turing architectures. Conversely, NormalFloat 4-bit (NF4) maintains robust long-context performance with viable latency (81 ms/tok). By coupling NF4 with a decoupled Florence-2 vision integration, we achieve visual reasoning with only 430 MB VRAM overhead. Furthermore, empirical observations of prompt-induced search space pruning show that structured prompting reduces latency by 47% without altering computational intensity (1.88 GFLOPs/token). The integrated architecture maintains an 8.37 GB footprint, establishing a viable RAG pipeline for 12-16 GB GPUs. Finally, structured few-shot prompting effectively compensates for quantization-induced reasoning loss, restoring mathematical accuracy from 35.0% to 92.0% across 200 trials.",
+        "authors": [
+          "Zahraa Selim",
+          "Menna Hamed",
+          "Wesam Ahmed",
+          "Sohyla Said",
+          "Sara Basheer",
+          "Rami Zewail"
+        ],
+        "categories": [
+          "cs.AI"
+        ],
+        "published": "2026-11-11T02:26:07Z",
+        "url": "https://arxiv.org/abs/2611.14924",
+        "pdf_url": "https://arxiv.org/pdf/2611.14924"
+      },
+      "lexical_score": 28.935,
+      "review": {
+        "score": 7,
+        "title_translated": "边缘原生多模态 RAG：面向消费级 GPU 的硬件感知量化与架构优化",
+        "tldr": "该论文在 Turing 架构消费级 GPU 上对多模态 RAG 系统进行工程集成与实测，比较 GPTQ 与 NF4 量化在长上下文与吞吐上的取舍，并验证了结构化提示对延迟和推理能力的改善。",
+        "method": "在 NVIDIA Tesla T4 上搭建多模态 RAG 框架，将生成模型的量化（GPTQ 对比 NF4）与解耦的 Florence-2 视觉模块结合，并通过结构化提示与少样本提示进行系统级实测。",
+        "findings": "GPTQ 吞吐更高（51.6 tok/s）但在 2048+ token 上下文出现不稳定，NF4 长上下文更稳健且延迟可接受（81 ms/tok）；NF4 加 Florence-2 视觉集成仅增加 430 MB 显存，整体占用 8.37 GB；结构化提示在不改变计算量（1.88 GFLOPs/token）的情况下把延迟降低 47%；结构化少样本提示把数学准确率从 35.0% 恢复到 92.0%（200 次试验）。",
+        "why_relevant": "直接对应研究者关注的 RAG 落地部署与系统评测，并涉及长上下文和量化对 RAG 效果的影响，适合作为工程实践参考。",
+        "tags": [
+          "RAG",
+          "量化",
+          "多模态",
+          "边缘部署"
+        ]
+      }
+    }
+  ]
+}
