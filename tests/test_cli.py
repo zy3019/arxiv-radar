@@ -81,3 +81,33 @@ def test_llm_failure_exits_nonzero(tmp_path, monkeypatch):
     stub_run(monkeypatch, LLMError("bad key"))
 
     assert cli.main(["--config", str(write_config(tmp_path)), "run"]) == 1
+
+
+def test_failure_is_annotated_on_github_actions(tmp_path, monkeypatch, capsys):
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    stub_run(monkeypatch, LLMError("bad key\n100% sure"))
+
+    assert cli.main(["--config", str(write_config(tmp_path)), "run"]) == 1
+
+    assert "::error title=arXiv Radar::bad key%0A100%25 sure" in capsys.readouterr().out
+
+
+def test_no_annotation_outside_github_actions(tmp_path, monkeypatch, capsys):
+    monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+    stub_run(monkeypatch, LLMError("bad key"))
+
+    assert cli.main(["--config", str(write_config(tmp_path)), "run"]) == 1
+
+    assert "::error" not in capsys.readouterr().out
+
+
+def test_unexpected_error_fails_the_run_and_is_annotated(tmp_path, monkeypatch, capsys):
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    stub_run(monkeypatch, KeyError("term"))
+
+    assert cli.main(["--config", str(write_config(tmp_path)), "run"]) == 1
+
+    out = capsys.readouterr().out
+    assert out.count("::error") == 1
+    assert "Unexpected KeyError" in out
+    assert not (tmp_path / "site").exists()

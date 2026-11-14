@@ -17,6 +17,34 @@ from .render import build_site
 log = logging.getLogger("arxiv_radar")
 
 
+class _ActionsAnnotations(logging.Handler):
+    """Repeat errors as GitHub Actions annotations.
+
+    Annotations show on a run's summary page, which anyone can read. The full log
+    needs a sign-in, so without this a failed run gives no visible reason.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(level=logging.ERROR)
+
+    def emit(self, record: logging.LogRecord) -> None:
+        if os.environ.get("GITHUB_ACTIONS") != "true":
+            return
+        message = record.getMessage()
+        for raw, escaped in (("%", "%25"), ("\r", "%0D"), ("\n", "%0A")):
+            message = message.replace(raw, escaped)
+        print(f"::error title=arXiv Radar::{message}", flush=True)
+
+
+def _configure_logging() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    # The SDK logs every request at INFO, which buries the pipeline's own messages.
+    logging.getLogger("httpx2").setLevel(logging.WARNING)
+    root = logging.getLogger()
+    if not any(isinstance(handler, _ActionsAnnotations) for handler in root.handlers):
+        root.addHandler(_ActionsAnnotations())
+
+
 def _make_reviewer(config: Config, no_llm: bool) -> Reviewer | None:
     if no_llm:
         return None
@@ -38,19 +66,19 @@ def main(argv: list[str] | None = None) -> int:
     commands.add_parser("build", help="rebuild the site from saved digests")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-    # The SDK logs every request at INFO, which buries the pipeline's own messages.
-    logging.getLogger("httpx2").setLevel(logging.WARNING)
+    _configure_logging()
     config = load_config(args.config)
 
     if args.command == "run":
         try:
             digest = run(config, _make_reviewer(config, args.no_llm))
-        except ArxivError as error:
+        except (ArxivError, LLMError) as error:
             log.error("%s", error)
             return 1
-        except LLMError as error:
-            log.error("%s", error)
+        except Exception as error:
+            # Anything unexpected still fails the run; this puts its cause in the log
+            # and, on GitHub, on the run's summary page.
+            log.exception("Unexpected %s: %s", type(error).__name__, error)
             return 1
         if digest is None:
             log.info("Nothing new on arXiv since the last run")
