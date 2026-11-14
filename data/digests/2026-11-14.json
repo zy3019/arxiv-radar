@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-14",
+  "fetched": 592,
+  "matched": 217,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.16063",
+        "title": "Vocabulary-Free Next-Event Prediction on Temporal Graphs",
+        "abstract": "Autoregressive transformer training through next-token prediction has driven remarkable advances in language modeling and has become increasingly effective for time-series modeling. Yet its success in temporal graph learning remains limited, and most temporal link-prediction methods are discriminative rather than autoregressive. While temporal graphs can have a natural serialization through chronological ordering edges, they lack an obvious graph-independent tokenization: existing node tokenization often uses a vocabulary that grows with the number of nodes, limiting scalability and cross-graph training. We propose GTGT, Generative Temporal Graph Transformer, a simple yet powerful vocabulary-free framework for self-supervised next-event prediction on temporal graphs. It predicts events for observed destinations, behavioral descriptors for novel destinations, and time gaps before new event. These targets have shared meanings across graphs, allowing one transformer to train across disjoint node sets without node-specific learned parameters. Local node identifiers let attention capture graph structure: Theoretically, we can show that our transformer-based model has the capacity for time-respecting message passing mechanisms. On Temporal Graph Benchmark (TGB), our GTGT not only achieves comparable or better link-prediction performance than established baselines, but also has much lower training cost. These results open the door to temporal graph pretraining for forecasting and other downstream tasks, providing a concrete step toward temporal graph foundation models.",
+        "authors": [
+          "Zhishang Luo",
+          "Venu Madhav Tammali",
+          "Amila Weerasinghe",
+          "Osso Vahabzadeh",
+          "Olcay Boz",
+          "Xue Hao",
+          "Yusu Wang"
+        ],
+        "categories": [
+          "cs.LG"
+        ],
+        "published": "2026-11-11T22:20:27Z",
+        "url": "https://arxiv.org/abs/2611.16063",
+        "pdf_url": "https://arxiv.org/pdf/2611.16063"
+      },
+      "lexical_score": 14.076,
+      "review": {
+        "score": 7,
+        "title_translated": "时序图上无词表的下一事件预测",
+        "tldr": "提出 GTGT，一个无需词表的自监督时序图 Transformer，通过预测下一事件、新节点行为描述和时间间隔实现跨图预训练。",
+        "method": "采用自回归生成式 Transformer 对时序图事件做下一事件预测，用局部节点标识符让注意力捕获图结构，并证明其具备时间感知消息传递能力。",
+        "findings": "在 Temporal Graph Benchmark (TGB) 上，GTGT 的链接预测性能达到或优于现有基线，且训练成本显著更低。",
+        "why_relevant": "该文属时序图学习新方法，涉及时序图 Transformer 的建模与预训练，与研究者关注的时序图神经网络及动态图基础模型方向直接相关。",
+        "tags": [
+          "时序图",
+          "生成式模型",
+          "链接预测",
+          "预训练"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.15224",
+        "title": "DGPExplainer: Generating Prototype Sequence Explanations for Dynamic Graph Neural Networks",
+        "abstract": "Graph Neural Networks (GNNs) have been successfully applied to learning from graph-structured data. However, applying them to dynamic graphs-where nodes and edges evolve over time-presents significant challenges, particularly regarding explainability. While explanation techniques for static GNNs are well established, they do not readily extend to dynamic GNNs (DGNNs) due to the added complexity introduced by temporal dynamics and spatiotemporal dependencies, especially when generating model-level explanations. To address this gap, we introduce DGPExplainer, a post-hoc, prototype-based explainer specifically designed for DGNN models that transforms their complex decision-making processes into human-understandable, analogical, case-based explanations. DGPExplainer first employs local explanation methods to identify important elements within temporal snapshots of dynamic graph sequences. It then decomposes the graph at each time step into distinct prototypes, thereby symbolizing the dynamic graph sequence. Finally, we design a sequence generation method that uses these symbolized sequences to learn and generate class-specific dynamic graph pattern sequences that serve as prototype explanations. Experiments on both synthetic and real-world datasets demonstrate that our method effectively produces prototype-based explanations for DGNN models across multiple classes.",
+        "authors": [
+          "Jinlong Hu",
+          "Shixu Fan",
+          "Chongzhang Li"
+        ],
+        "categories": [
+          "cs.LG"
+        ],
+        "published": "2026-11-11T09:17:01Z",
+        "url": "https://arxiv.org/abs/2611.15224",
+        "pdf_url": "https://arxiv.org/pdf/2611.15224"
+      },
+      "lexical_score": 17.509,
+      "review": {
+        "score": 6,
+        "title_translated": "DGPExplainer：为动态图神经网络生成原型序列解释",
+        "tldr": "提出一种事后、基于原型的解释器 DGPExplainer，将动态图神经网络（DGNN）的决策过程转化为可理解的原型序列式案例解释。",
+        "method": "先用局部解释方法在动态图各个时间快照上识别重要元素，再把每一步的图分解为不同原型以符号化动态图序列，最后用序列生成方法学习并生成类特定的动态图模式序列作为原型解释。",
+        "findings": "在合成与真实数据集上的实验表明，该方法能为多类别 DGNN 模型有效生成基于原型的解释。",
+        "why_relevant": "研究者关注时序图神经网络的可解释性，该工作针对动态图模型的可解释性提出了新的原型解释方法，与动态图时序建模主题相关。",
+        "tags": [
+          "动态图神经网络",
+          "可解释性",
+          "原型解释",
+          "时序图学习"
+        ]
+      }
+    }
+  ]
+}
