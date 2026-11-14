@@ -2,26 +2,40 @@
 
 # arXiv categories to watch: https://arxiv.org/category_taxonomy
 categories:
-  - cs.CL
+  - cs.CR
   - cs.LG
-  - cs.AI
 
 # Your interests in plain language, in any language. The LLM scores papers against this.
 interests: |
-  我关注大语言模型的应用工程：检索增强生成（RAG）、Agent 的工具调用与规划、
-  长上下文，以及如何评测这些系统。偏好有开源代码、能落地的工作；
-  对纯理论推导和与语言无关的计算机视觉论文不感兴趣。
+  我研究基于溯源图（provenance graph）的入侵检测和 APT 检测：用图神经网络，
+  尤其是时序图神经网络（TGAT、TGN、DyGFormer 等）分析主机审计日志，
+  关心这些模型的时间编码、注意力和记忆机制。
+  也关注这个方向的评测方法和数据集质量（DARPA TC、OpTC 的标注与基准问题）、
+  横向移动检测、日志异常检测，以及时序图学习本身的新方法。
+  优先推荐综述、SoK、基准和数据集论文，以及有开源代码、可复现的工作。
+  对大模型越狱与提示注入、密码学、区块链、隐私计算、硬件安全不感兴趣；
+  只做网络流量分类的入侵检测只算相关背景。
 
 # English keywords for the free first-pass ranking. arXiv abstracts are in English.
+# Every word is scored on its own, so prefer short, distinctive terms and abbreviations
+# over phrases padded with common words such as "detection" or "system".
 keywords:
-  - retrieval-augmented generation
-  - RAG
-  - LLM agents
-  - tool use
-  - planning
-  - long context
-  - evaluation
-  - benchmark
+  - provenance graph
+  - APT
+  - advanced persistent threat
+  - intrusion detection
+  - lateral movement
+  - audit log
+  - threat hunting
+  - temporal graph
+  - dynamic graph
+  - TGN
+  - CTDG
+  - OpTC
+  - DARPA
+  - HIDS
+  - EDR
+  - log anomaly
 
 # Papers containing any of these are dropped before the LLM sees them.
 exclude_keywords: []
@@ -32,8 +46,7 @@ language: zh
 # How far back to look. arXiv takes up to about 3.5 days to announce a paper over a
 # weekend, so keep this at 5 or more. Papers already processed are never repeated.
 lookback_days: 5
-max_fetch: 3000       # upper limit on papers fetched per run (these three categories
-                      # had about 1,700 papers in 5 days in November 2026)
+max_fetch: 3000       # upper limit on papers fetched per run
 
 max_candidates: 30    # papers sent to the LLM per run; this drives the API cost
 max_papers: 15        # papers shown per digest
