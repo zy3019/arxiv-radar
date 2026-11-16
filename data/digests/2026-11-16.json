@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-16",
+  "fetched": 176,
+  "matched": 74,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.18199",
+        "title": "T2ST: Data-Efficient Spatio-Temporal Foundation Models via Temporal Data and Knowledge Transfer",
+        "abstract": "Spatio-temporal foundation models (STFMs) require large-scale training corpora, yet synchronized observations and spatial metadata are costly to acquire and curate, limiting the availability of suitable data. By contrast, time-series data are abundant and easier to collect. Since observations at each location form a time series, this motivates a natural question: can abundant time-series data enhance STFMs when spatio-temporal observations are scarce? To bridge this gap, we propose T2ST, a data-efficient training framework that augments limited spatio-temporal observations with selected auxiliary time series and transfers knowledge from a frozen time-series foundation model. Our key insight is that temporal pattern learning can benefit from abundant external time series, while spatial dependency learning remains grounded in real spatio-temporal observations. Guided by this insight, T2ST retrieves matched sequences to reinforce sparsely observed temporal patterns and selects reliable complementary sequences to broaden temporal coverage. Temporal relation distillation aligns relationships among historical patches, while multi-scale prediction distillation transfers forecasting behavior at fine and coarse temporal resolutions, enabling knowledge transfer across heterogeneous architectures. Using only 10\\% of the original spatio-temporal data, T2ST enables STFMs to achieve overall forecasting performance competitive with or superior to their full-data counterparts across six long-term and twelve short-term forecasting datasets. These results establish a new paradigm for data-efficient training of spatio-temporal foundation models. Code is available at https://anonymous.4open.science/r/T2ST-65F3/.",
+        "authors": [
+          "Yue Xu",
+          "Kaiyun Wei",
+          "Wenying Duan",
+          "Zichen Xu",
+          "Shuai Ma",
+          "Xiaoxi He"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.AI"
+        ],
+        "published": "2026-11-13T14:05:40Z",
+        "url": "https://arxiv.org/abs/2611.18199",
+        "pdf_url": "https://arxiv.org/pdf/2611.18199"
+      },
+      "lexical_score": 5.472,
+      "review": {
+        "score": 6,
+        "title_translated": "T2ST：通过时序数据与知识迁移实现数据高效的时空基础模型",
+        "tldr": "T2ST 用时序基础模型的知识蒸馏来弥补稀缺的时空观测数据，仅用 10% 数据即可训练出与全量数据相当的时空基础模型。",
+        "method": "检索匹配的辅助时间序列以增强稀疏的时间模式，并通过时序关系蒸馏（对齐历史 patch 间关系）与多尺度预测蒸馏（迁移粗细粒度预测行为）从冻结的时序基础模型向时空模型迁移知识。",
+        "findings": "在 6 个长期与 12 个短期预测数据集上，仅用 10% 原始时空数据训练的 T2ST 模型取得了与全量数据模型相当或更优的总体预测表现；代码已开源。",
+        "why_relevant": "属于时序/时空基础模型的数据高效训练与知识蒸馏，与研究者关注的时序图学习新方法和可复现基准有方法上的邻近性，但不涉及溯源图或入侵检测。",
+        "tags": [
+          "时空基础模型",
+          "知识蒸馏",
+          "时间序列",
+          "数据高效训练"
+        ]
+      }
+    }
+  ]
+}
