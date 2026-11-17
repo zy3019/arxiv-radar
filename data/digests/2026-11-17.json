@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-17",
+  "fetched": 480,
+  "matched": 204,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.21548",
+        "title": "TRACE: Topological Representations for Anomaly detection through Contrastive Embeddings",
+        "abstract": "Intrusion detectors must recognize evolving malicious behavior even when confirmed attack labels are scarce or incomplete. We present TRACE, a topology-aware graph contrastive learning framework for label-efficient intrusion detection. TRACE learns from benign system-activity graphs by combining message-passing and topological representations, then assigns anomaly scores in the same projected embedding space optimized by the contrastive objective. This design captures both local interactions and graph-scale structural deviations without using attack labels during representation learning. A labeled validation set containing benign and malicious graphs is used only to calibrate the anomaly threshold. We evaluate TRACE on StreamSpot, GraSec-IoT, and Unicorn Wget against a supervised graph neural network and the benign-only GraphCL baseline. TRACE obtains F1 scores of 0.923, 0.790, and 0.583, respectively. Compared with GraphCL, this is higher on StreamSpot (0.450) and Unicorn Wget (0.203), but lower on GraSec-IoT (0.975). The supervised model leads on StreamSpot and GraSec-IoT, whereas TRACE has the highest F1 on Unicorn Wget. The mixed results show that topology-aware benign-only learning can improve detection in some graph settings but does not provide a uniform advantage.",
+        "authors": [
+          "Sydney Johns"
+        ],
+        "categories": [
+          "cs.CR",
+          "cs.AI"
+        ],
+        "published": "2026-11-16T18:31:11Z",
+        "url": "https://arxiv.org/abs/2611.21548",
+        "pdf_url": "https://arxiv.org/pdf/2611.21548"
+      },
+      "lexical_score": 26.957,
+      "review": {
+        "score": 6,
+        "title_translated": "TRACE：通过对比嵌入的拓扑表征用于异常检测",
+        "tldr": "TRACE 提出一种拓扑感知的图对比学习框架，仅用良性系统活动图学习表征，再用带标签验证集校准异常阈值，在多个入侵检测数据集上取得混合效果。",
+        "method": "结合消息传递与拓扑表征，在对比目标优化的投影嵌入空间中学习良性图，并在该空间为图分配异常分数。",
+        "findings": "在 StreamSpot、GraSec-IoT、Unicorn Wget 上 F1 分别为 0.923、0.790、0.583；相比仅用良性的 GraphCL 基线，在 StreamSpot（0.450）和 Unicorn Wget（0.203）上更高，但在 GraSec-IoT 上低于 GraphCL（0.975）；监督模型在 StreamSpot 和 GraSec-IoT 上领先，TRACE 仅在 Unicorn Wget 上 F1 最高。",
+        "why_relevant": "属于基于图的入侵检测与日志异常检测，采用无攻击标签的对比学习思路，可作为溯源图异常检测的对比基线参考，但未涉及时序图模型与溯源图本身。",
+        "tags": [
+          "图对比学习",
+          "异常检测",
+          "入侵检测",
+          "系统审计日志"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.20334",
+        "title": "Residual-Tail-Informed Flow Matching for Time Series Anomaly Detection",
+        "abstract": "Time series anomaly detection (TSAD) models are often trained on nominal data using average-risk objectives, which emphasize dominant normal patterns. However, real time series can contain rare but valid nominal regimes that are underrepresented in the training distribution. We show that data-space flow matching can over-penalize such rare-normal windows and assign them anomaly scores comparable to those of true anomalies. To address this, we propose Residual-Tail-Informed Flow Matching (RT-FM), an unsupervised framework that uses a temporal variational autoencoder to estimate residual latent tailness and converts it into bounded, warmup-annealed weights for training a data-space flow matching model. Experiments on seven TSAD benchmarks show that RT-FM improves rare-normal coverage while preserving strong anomaly discrimination, substantially reducing false alarms on such windows and resulting in improved aggregate detection performance. The code is available at: https://github.com/trustAIoT/RT-FM_time-series-anomaly",
+        "authors": [
+          "Shyam Sundar Saravanan",
+          "Tie Luo",
+          "Sanjay Madria"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.AI"
+        ],
+        "published": "2026-11-15T23:57:22Z",
+        "url": "https://arxiv.org/abs/2611.20334",
+        "pdf_url": "https://arxiv.org/pdf/2611.20334"
+      },
+      "lexical_score": 16.633,
+      "review": {
+        "score": 6,
+        "title_translated": "残差尾部感知的流匹配用于时间序列异常检测",
+        "tldr": "RT-FM 用时间变分自编码器估计残差潜空间的尾部程度，据此为流匹配模型加权，缓解罕见但正常的时序窗口被误判为异常的问题。",
+        "method": "用时间 VAE 估计每个窗口残差的\"尾部程度\"，转成有界且带 warmup 退火的样本权重，用于训练数据空间的 flow matching 异常检测模型。",
+        "findings": "在 7 个 TSAD 基准上，RT-FM 在保持较强异常区分能力的同时提升对稀有正常模式的覆盖，显著减少这类窗口上的误报，整体检测性能提升；代码已开源。",
+        "why_relevant": "属于日志/时序异常检测这一相关分支，且关注罕见正常模式的误报问题，与研究者对异常检测评测和误报成本的关切相通，但方法本身不是基于溯源图或图神经网络。",
+        "tags": [
+          "时间序列异常检测",
+          "flow matching",
+          "误报抑制",
+          "无监督学习"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.20812",
+        "title": "The Cybersecurity Dataset Observatory: Which Data for AI in Cybersecurity?",
+        "abstract": "AI is increasingly used for cybersecurity tasks such as intrusion and malware detection, in enterprise, industrial, vehicular and mobile networks. Its effectiveness depends on data: models need representative network traffic, both to be trained and to be evaluated realistically. Public datasets of cybersecurity network traffic, however, are scattered across laboratory pages, repositories and aggregators, and are continuously released, corrected and withdrawn: 92 of the 234 datasets we catalog were released in 2023 or later. At this pace, surveys that list them are outdated soon after publication, since they describe the field only as it was when they were written. We present the Cybersecurity dataset observatory, a public and continuously updated catalog of cybersecurity datasets based on network traffic. New datasets are added as they are found or submitted, every record is periodically re-checked against its original source, to which it links rather than hosting the data, and every change is recorded in a public change log. This paper documents the first release: we define a traffic-centered scope and a seven-axis taxonomy, and review 234 datasets (204 original captures and 30 derivatives) across 14 domains. The review shows a field that grows quickly but unevenly, where 91 datasets distribute only processed records, a few laboratories produce a large share of the data, and UAV, wireless and V2X networks have little public evidence, while 5G has few real captures. We then relate the catalog to common uses in AI research, outline a procedure for selecting datasets, and discuss benchmark pitfalls and open gaps.",
+        "authors": [
+          "Francesco Cerasuolo",
+          "Gabriele Mangiacapre",
+          "Antonio Pescapè"
+        ],
+        "categories": [
+          "cs.CR",
+          "cs.AI"
+        ],
+        "published": "2026-11-16T09:58:03Z",
+        "url": "https://arxiv.org/abs/2611.20812",
+        "pdf_url": "https://arxiv.org/pdf/2611.20812"
+      },
+      "lexical_score": 9.061,
+      "review": {
+        "score": 6,
+        "title_translated": "网络安全数据集观测站：面向网络安全 AI 应选用哪些数据？",
+        "tldr": "该论文公开发布一个持续更新的网络安全网络流量数据集目录，收录 234 个数据集并给出七维分类、选数流程与基准陷阱讨论。",
+        "method": "建立公开且持续维护的数据集目录：定义以流量为中心的范围和七轴分类法，每条记录定期回溯原始来源并公开变更日志，再结合 AI 研究常见用途给出数据集选取流程。",
+        "findings": "共审查 234 个数据集（204 个原始采集、30 个衍生），覆盖 14 个领域，其中 92 个发布于 2023 年及以后；91 个数据集只发布处理后记录，少数实验室贡献了大部分数据，UAV、无线和 V2X 网络公开证据稀少，5G 真实采集很少。",
+        "why_relevant": "该工作属于数据集与评测方法类的综述性资源，与研究者关心的数据集质量、标注与基准问题直接相关；但聚焦网络流量而非溯源图，因此仅作背景参考。",
+        "tags": [
+          "数据集目录",
+          "网络安全评测",
+          "网络流量",
+          "基准问题"
+        ]
+      }
+    }
+  ]
+}
