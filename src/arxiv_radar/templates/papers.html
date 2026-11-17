@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block title %}{{ labels.all_papers }} · {{ title }}{% endblock %}
+
+{% block style %}
+.filters { display: grid; gap: 12px; margin: 0 0 20px; }
+.filters input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+.filters select {
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px; }
+.status { color: var(--muted); }
+.clear { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; cursor: pointer; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 1px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.chip span { margin-left: 4px; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.chip[aria-pressed="true"] span { color: inherit; }
+.papers { margin: 0; padding: 0; list-style: none; }
+.paper { margin-bottom: 12px; padding: 16px 20px; }
+.paper .tldr { margin-top: 8px; font-size: 15px; }
+.paper .tags { margin-top: 10px; }
+.paper .meta { margin-top: 8px; }
+{% endblock %}
+
+{% block header %}
+  <div class="date">{{ labels.all_papers }}</div>
+  <p class="funnel">{{ summary }}</p>
+{% endblock %}
+
+{% block main %}
+{% if not items %}
+  <p class="empty">{{ labels.empty_site }}</p>
+{% else %}
+  <div class="filters" id="filters" hidden>
+    <input type="search" id="q" placeholder="{{ labels.search }}" aria-label="{{ labels.search }}" autocomplete="off">
+    <div class="controls">
+      {% if thresholds %}
+      <select id="min-score" aria-label="{{ labels.score }}">
+        <option value="0">{{ labels.any_score }}</option>
+        {% for n in thresholds %}
+        <option value="{{ n }}">{{ labels.score_at_least.format(n=n) }}</option>
+        {% endfor %}
+      </select>
+      {% endif %}
+      <select id="sort" aria-label="{{ labels.sort }}">
+        <option value="date">{{ labels.newest_first }}</option>
+        <option value="score">{{ labels.best_first }}</option>
+      </select>
+      <span class="status" id="status" aria-live="polite" data-showing="{{ labels.showing }}" data-tag="{{ labels.tag_filter }}"></span>
+      <button type="button" class="clear" id="clear" hidden>{{ labels.clear_filters }}</button>
+    </div>
+    {% if top_tags %}
+    <div class="chips" role="group" aria-label="{{ labels.common_tags }}">
+      {% for tag, count in top_tags %}
+      <button type="button" class="chip" data-tag="{{ tag }}" aria-pressed="false">{{ tag }}<span>{{ count }}</span></button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <ol class="papers" id="papers">
+  {% for date, entry in items %}
+  {% set paper = entry.paper %}
+  {% set review = entry.review %}
+  <li class="paper" data-score="{{ review.score if review else 0 }}" data-tags='{{ (review.tags if review else []) | tojson }}'>
+    <div class="head">
+      {% if review %}
+      <div class="score {{ 'high' if review.score >= 8 else 'mid' if review.score >= 6 else '' }}">{{ review.score }}</div>
+      {% endif %}
+      <div>
+        <h2><a href="{{ paper.url }}">{{ review.title_translated if review else paper.title }}</a></h2>
+        {% if review %}
+        <p class="original">{{ paper.title }}</p>
+        <p class="tldr">{{ review.tldr }}</p>
+        {% if review.tags %}
+        <ul class="tags">
+          {% for tag in review.tags %}
+          <li><a href="?tag={{ tag | urlencode }}" data-tag="{{ tag }}">{{ tag }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endif %}
+        <p class="meta">
+          <a href="{{ date }}.html#{{ paper.id }}">{{ labels.issue.format(date=date) }}</a>
+          · {{ paper.authors[:3] | join(", ") }}{% if paper.authors | length > 3 %} et al.{% endif %}
+          · <a href="{{ paper.pdf_url }}">PDF</a>
+        </p>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+  </ol>
+  <p class="empty" id="no-match" hidden>{{ labels.no_match }}</p>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+{% if items %}
+<script>
+(function () {
+  var list = document.getElementById("papers");
+  var filters = document.getElementById("filters");
+  var search = document.getElementById("q");
+  var minScore = document.getElementById("min-score");
+  var sort = document.getElementById("sort");
+  var status = document.getElementById("status");
+  var clear = document.getElementById("clear");
+  var noMatch = document.getElementById("no-match");
+  var chips = filters.querySelectorAll(".chip");
+  var forEach = Array.prototype.forEach;
+
+  // Model-written tags vary in case and spacing, so compare them loosely.
+  function norm(text) {
+    return text.replace(/\s+/g, "").toLowerCase();
+  }
+  function fill(template, name, value) {
+    return template.replace("{" + name + "}", function () { return String(value); });
+  }
+
+  var papers = Array.prototype.map.call(list.children, function (el, index) {
+    return {
+      el: el,
+      index: index,
+      score: Number(el.getAttribute("data-score")),
+      tags: JSON.parse(el.getAttribute("data-tags")).map(norm),
+      text: el.textContent.replace(/\s+/g, " ").toLowerCase()
+    };
+  });
+  var tag = "";
+  var order = "date";
+
+  function update() {
+    var terms = search.value.toLowerCase().split(/\s+/).filter(Boolean);
+    var min = minScore ? Number(minScore.value) : 0;
+    var key = norm(tag);
+
+    if (sort.value !== order) {
+      order = sort.value;
+      papers.slice().sort(function (a, b) {
+        return (order === "score" ? b.score - a.score : 0) || a.index - b.index;
+      }).forEach(function (paper) { list.appendChild(paper.el); });
+    }
+
+    var shown = 0;
+    papers.forEach(function (paper) {
+      var match = paper.score >= min
+        && (!key || paper.tags.indexOf(key) !== -1)
+        && terms.every(function (term) { return paper.text.indexOf(term) !== -1; });
+      paper.el.hidden = !match;
+      if (match) shown += 1;
+    });
+
+    forEach.call(chips, function (chip) {
+      var pressed = key !== "" && norm(chip.getAttribute("data-tag")) === key;
+      chip.setAttribute("aria-pressed", String(pressed));
+    });
+    var text = fill(fill(status.getAttribute("data-showing"), "shown", shown), "total", papers.length);
+    if (tag) text += " · " + fill(status.getAttribute("data-tag"), "tag", tag);
+    status.textContent = text;
+    clear.hidden = !(terms.length || min || tag);
+    noMatch.hidden = shown > 0;
+
+    var params = new URLSearchParams();
+    if (search.value.trim()) params.set("q", search.value.trim());
+    if (tag) params.set("tag", tag);
+    if (min) params.set("min", String(min));
+    if (order !== "date") params.set("sort", order);
+    var query = params.toString();
+    try {
+      history.replaceState(null, "", query ? "?" + query : location.pathname);
+    } catch (error) {
+      // Some browsers refuse this on file:// pages; the filters still work.
+    }
+  }
+
+  search.addEventListener("input", update);
+  sort.addEventListener("change", update);
+  if (minScore) minScore.addEventListener("change", update);
+  forEach.call(chips, function (chip) {
+    chip.addEventListener("click", function () {
+      var value = chip.getAttribute("data-tag");
+      tag = norm(value) === norm(tag) ? "" : value;
+      update();
+    });
+  });
+  list.addEventListener("click", function (event) {
+    var link = event.target.closest("a[data-tag]");
+    if (!link) return;
+    event.preventDefault();
+    tag = link.getAttribute("data-tag");
+    update();
+    filters.scrollIntoView({ block: "start" });
+  });
+  clear.addEventListener("click", function () {
+    search.value = "";
+    tag = "";
+    if (minScore) minScore.value = "0";
+    update();
+    search.focus();
+  });
+
+  var params = new URLSearchParams(location.search);
+  search.value = params.get("q") || "";
+  tag = params.get("tag") || "";
+  var min = params.get("min");
+  if (minScore && Array.prototype.some.call(minScore.options, function (option) {
+    return option.value === min;
+  })) {
+    minScore.value = min;
+  }
+  if (params.get("sort") === "score") sort.value = "score";
+  filters.hidden = false;
+  update();
+})();
+</script>
+{% endif %}
+{% endblock %}

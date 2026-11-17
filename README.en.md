@@ -25,6 +25,7 @@ flowchart LR
 - **Easy to switch models:** DeepSeek by default, and any other OpenAI-compatible API or Claude works too.
 - **Works without an API key:** papers are then ranked by keyword only, with no summaries, and the page says so.
 - **No repeats:** a processed paper never appears again.
+- **Look back any time:** the All papers page collects every paper picked so far, with search and filters for tag and score. Click a tag under any paper to see others on the same topic.
 
 ## Deploy to GitHub (about 10 minutes)
 
@@ -35,7 +36,7 @@ flowchart LR
 5. **Turn on Pages:** under Settings → Pages, set Source to GitHub Actions.
 6. **Enable and run:** on the Actions tab, enable workflows (forks start with them off), choose Daily radar, and click Run workflow.
 
-Your page will be at `https://<your-username>.github.io/<repo-name>/`, with the feed at `feed.xml` under the same address. It updates every weekday at 02:00 UTC, though GitHub sometimes starts scheduled runs a few hours late.
+Your page will be at `https://<your-username>.github.io/<repo-name>/`, with the feed at `feed.xml` and every paper picked so far at `papers.html` under the same address. It updates every weekday at 02:00 UTC, though GitHub sometimes starts scheduled runs a few hours late.
 
 ## Run locally
 

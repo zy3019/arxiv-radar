@@ -25,6 +25,7 @@ flowchart LR
 - **换模型很方便：** 默认使用 DeepSeek，也支持其他兼容 OpenAI 接口的服务和 Claude。
 - **没有 API Key 也能运行：** 这时只按关键词排序，不生成摘要，页面上会有提示。
 - **不重复：** 处理过的论文不会再次出现。
+- **随时回看：** 「全部论文」页汇总历次入选的论文，可以搜索，也可以按标签和评分筛选。点论文下的标签，就能看到同一主题的其他论文。
 
 ## 部署到 GitHub（约 10 分钟）
 
@@ -35,7 +36,7 @@ flowchart LR
 5. **开启 Pages**：在 Settings → Pages 中，把 Source 设为 GitHub Actions。
 6. **启用并运行**：在 Actions 页面启用工作流（Fork 的仓库默认关闭），选择 Daily radar，点击 Run workflow。
 
-运行完成后，页面地址是 `https://<你的用户名>.github.io/<仓库名>/`，RSS 在同一地址下的 `feed.xml`。之后每个工作日 UTC 02:00（北京时间 10:00）自动更新，GitHub 的定时任务有时会推迟几个小时。
+运行完成后，页面地址是 `https://<你的用户名>.github.io/<仓库名>/`，RSS 在同一地址下的 `feed.xml`，历次入选的论文都在 `papers.html`。之后每个工作日 UTC 02:00（北京时间 10:00）自动更新，GitHub 的定时任务有时会推迟几个小时。
 
 ## 本地运行
 
