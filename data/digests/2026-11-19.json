@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-19",
+  "fetched": 253,
+  "matched": 107,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.23753",
+        "title": "Interpreting Timestamp Permutations in Dynamic Link Prediction",
+        "abstract": "Timestamp permutations are used to test whether dynamic link predictors exploit temporal information, but a performance gap can reflect changes in training, evaluation history, or both. We separate these effects with a crossed diagnostic and measure input exposure: whether altered histories actually change the predictor's inputs. On MOOC, TCL trained with binary cross-entropy gains approximately eight pairwise-accuracy points from original-chronology training under either evaluation history, while changing history at fixed weights gives only 0.03 points. The small history contrast reflects unchanged inputs for 68.37% of queries, stable rankings for most others, and cancellation of gains and losses. Under original evaluation history, suppressing explicit time encoding reduces the training contrast from 8.03 to 3.64 points, a paired reduction of 4.39 points (95% interval [3.68, 5.09]) across six seeds. DyGFormer shows corresponding training and history contrasts of 22.34 and 0.38 points across two seeds, despite greater exposure. Partial history permutations further separate nominal intervention strength, input changes, and aggregate accuracy. These comparisons turn a single permutation gap into interpretable statements about training conditions and model responses, while leaving the internal mechanisms of temporal learning open.",
+        "authors": [
+          "Ilia Karpov",
+          "Kirill Koloskov",
+          "Valeriy Kuleshov",
+          "Dmitry Ilvovsky"
+        ],
+        "categories": [
+          "cs.LG",
+          "cs.AI",
+          "cs.LO",
+          "cs.SI"
+        ],
+        "published": "2026-11-18T03:08:09Z",
+        "url": "https://arxiv.org/abs/2611.23753",
+        "pdf_url": "https://arxiv.org/pdf/2611.23753"
+      },
+      "lexical_score": 7.721,
+      "review": {
+        "score": 7,
+        "title_translated": "解读动态链接预测中的时间戳置换",
+        "tldr": "该论文将时间戳置换实验中的性能差距拆解为训练历史效应与评测历史效应，并测量输入是否真正被改变，从而把单一置换差距转化为可解释的结论。",
+        "method": "在 MOOC 数据上设计交叉诊断实验，分离训练期与评测期历史的作用，并以输入暴露程度量化置换是否真正改变了模型输入；在 TCL 和 DyGFormer 上比较，并通过抑制显式时间编码做消融。",
+        "findings": "TCL 用二元交叉熵训练时，原始时序训练在两个评测历史下均带来约 8 个百分点成对准确率提升，而固定权重仅改评测历史只带来 0.03 个百分点；68.37% 的查询输入未变。原始评测历史下抑制显式时间编码使训练对比从 8.03 降至 3.64（配对减少 4.39，95% 区间 [3.68, 5.09]，六个种子）；DyGFormer 的训练与历史对比分别为 22.34 和 0.38 个百分点（两个种子）。",
+        "why_relevant": "该工作针对时序图模型的时序信息利用与评测方法学，正好对应研究者对时序图神经网络时间编码机制及基准评测可靠性的关注。",
+        "tags": [
+          "动态链接预测",
+          "时序图学习",
+          "评测方法",
+          "时间编码"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.24426",
+        "title": "DyNA-Mixer: Decoupling Time and Topology for Scalable Dynamic Node Affinity Prediction",
+        "abstract": "Continuous-time dynamic graphs preserve the ordering, timing, and evolving strength of interactions that static snapshots discard, making dynamic graph mining essential for evolving systems such as recommender systems, trade networks, and transaction platforms. Research in this area has centered on dynamic link prediction, which forecasts only whether a future interaction will occur, whereas many applications also need its intensity. The dynamic node affinity prediction (DNAP) problem generalizes this task to continuous targets and full-candidate ranking, making it more broadly applicable but substantially harder. This raises two coupled difficulties: ranking requires a predictor expressive enough to capture both multi-scale temporal evolution and graph-wide collaborative patterns, yet running such a predictor over every source--destination pair is computationally prohibitive. We propose DyNA-Mixer, which decouples temporal forecasting from collaborative structure modeling. It adopts a multi-scale temporal predictor for pair-specific affinity evolution, constructs a Virtual Collaborative Graph that infers query-time relationships and aggregates trends from related interactions, and fuses the two through a gated residual mechanism. A sparsity-aware evaluation strategy further restricts expensive forecasting to pairs with recent non-zero affinities. Experiments on four Temporal Graph Benchmark datasets for the DNAP problem show that DyNA-Mixer achieves new state-of-the-art NDCG@10 on every dataset, including a 17.8\\% relative test improvement over the strongest baseline on tgbn-token, the largest dataset.",
+        "authors": [
+          "Yuanxing Zheng",
+          "Liping Wang",
+          "Xuemin Lin"
+        ],
+        "categories": [
+          "cs.LG"
+        ],
+        "published": "2026-11-18T13:45:25Z",
+        "url": "https://arxiv.org/abs/2611.24426",
+        "pdf_url": "https://arxiv.org/pdf/2611.24426"
+      },
+      "lexical_score": 20.118,
+      "review": {
+        "score": 6,
+        "title_translated": "DyNA-Mixer：解耦时间与拓扑以实现可扩展的动态节点亲和度预测",
+        "tldr": "提出 DyNA-Mixer，将连续时间动态图上的动态节点亲和度预测（DNAP）拆分为多尺度时间预测与虚拟协作图结构建模两部分，在四个 TGB 数据集上刷新 NDCG@10 最优结果。",
+        "method": "用一个多尺度时间预测器刻画具体节点对之间的亲和度演化，再构造 Virtual Collaborative Graph 在查询时推断关系并聚合相关交互的趋势，两者通过门控残差机制融合；另采用稀疏感知的评测策略，只对近期亲和度非零的节点对做昂贵预测。",
+        "findings": "在四个 Temporal Graph Benchmark 数据集上，DNAP 任务的 NDCG@10 均达到新的最优，最大数据集 tgbn-token 上相对最强基线提升 17.8%。",
+        "why_relevant": "该工作属于时序图学习的新方法，涉及连续时间动态图的时间编码与结构建模的解耦，可为其关注的时序图神经网络与动态图评测提供参考，但并不针对溯源图或入侵检测。",
+        "tags": [
+          "时序图学习",
+          "连续时间动态图",
+          "Temporal Graph Benchmark",
+          "链接预测"
+        ]
+      }
+    }
+  ]
+}
