@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-23",
+  "fetched": 200,
+  "matched": 84,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.26929",
+        "title": "Large Reported CHB-MIT Adaptation Gains Disappear with Pretrained Encoders and Matched Probes",
+        "abstract": "Dani and Liebe (2026) (DL) report that adapting the final encoder block of BIOT and CBraMod with self-supervised learning (SSL) improves CHB-MIT seizure-detection ROC-AUC by 36.2 and 29.5 points over linear probing. We investigate these results with their released code and an independent pipeline. The release loads pretrained weights for adaptation only when an otherwise unset configuration key is supplied, and its CBraMod probe reads the reconstruction head with dropout active. With pretrained initialisation and a probe on the encoder output in evaluation mode, the fixed-recipe adaptation gain on DL's split is -0.6 points for BIOT (95% interval [-3.8, +2.6]) and +0.01 for CBraMod ([-0.02, +0.04]) across five seeds. Across DL's split and five subject rotations on CHB-MIT and Siena Scalp EEG, with equally tuned linear probes (30 configurations, up to 500 epochs, validation-based early stopping), mean adaptation effects range from -1.1 to +5.7 ROC-AUC points over 18 comparisons (related settings and feature variants). Twelve of 18 support equivalence within +/-3 points under dependence-adjusted inference (8 of 12 rotation and 4 of 6 fixed-split comparisons); six are unresolved. After correcting rotation intervals for dependence, no positive effect has a 95% interval excluding zero. The +/-3 margin is an analysis threshold, not a clinically validated one, and smaller margins support fewer equivalences. Two fixed-probe gains near +21 points shrink under the same tuning, with smaller benefits unresolved. We also audit a CHB-MIT protocol shared by at least 14 papers. No tested configuration reproduces DL Table 1 as a whole. These findings concern the tested configurations; the encoder-level probe and subsequent checks were chosen post hoc.",
+        "authors": [
+          "Joseph Sankoorikal Johny",
+          "Antony J. Sankoorikal"
+        ],
+        "categories": [
+          "cs.LG",
+          "stat.ML"
+        ],
+        "published": "2026-11-20T00:25:41Z",
+        "url": "https://arxiv.org/abs/2611.26929",
+        "pdf_url": "https://arxiv.org/pdf/2611.26929"
+      },
+      "lexical_score": 4.977,
+      "review": {
+        "score": 6,
+        "title_translated": "预训练编码器与匹配探针下，CHB-MIT 上报告的大幅适配增益消失",
+        "tldr": "复现并审计一篇报告 BIOT/CBraMod 自监督适配在 CHB-MIT 癫痫检测上大幅提升的论文，发现修正预训练权重加载与探针后增益基本消失，并顺带审计了至少 14 篇论文共用的 CHB-MIT 评测协议。",
+        "method": "用原文发布的代码和独立流程重做实验，修正预训练初始化与编码器输出探针（评估模式、无 dropout），在原文划分及 5 个被试轮换上用等量调参的线性探针（30 组配置、最多 500 轮、基于验证集早停）比较适配效果。",
+        "findings": "修正配方后适配增益为 BIOT -0.6 点（95% 区间 [-3.8, +2.6]）、CBraMod +0.01 点；18 组比较平均效应 -1.1 至 +5.7 点，其中 12 组在 ±3 点内支持等价，6 组未定；依赖校正后无正效应区间排除零；未能整体复现原文 Table 1。",
+        "why_relevant": "该工作属于研究者关注的时序/生理信号基准复现与数据集评测质量问题，方法学上的探针调参与区间推断可直接借鉴到溯源图 APT 检测的评测设计。",
+        "tags": [
+          "基准复现",
+          "评测方法",
+          "自监督适配",
+          "EEG/CHB-MIT"
+        ]
+      }
+    }
+  ]
+}
