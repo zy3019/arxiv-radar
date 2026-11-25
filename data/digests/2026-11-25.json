@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-25",
+  "fetched": 778,
+  "matched": 315,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.30289",
+        "title": "Temporal Leakage Distorts the TGB Node Affinity Leaderboard: A Point-in-Time Audit",
+        "abstract": "Node affinity prediction in the Temporal Graph Benchmark (TGB) asks how a node's future interactions will be distributed over other nodes. On this task, methods that reuse past ground-truth labels often outperform temporal graph neural networks, and the state of the art builds on them. Such comparisons assume a point-in-time correct evaluation, in which a model receives only information available at prediction time. Drawing on as-of joins and bitemporal databases, we formalize this requirement by distinguishing when a label must be predicted, its query time, from when it is fully determined, its availability time, and we audit the four TGB node affinity datasets and their evaluation loop with model-agnostic tools. None of the four meets it. On three datasets, each label summarizes a single day about five days after its timestamp, not the documented following week, yet the loop feeds it back right after that timestamp; on the fourth, the loop processes the edges from which each label is computed before predicting it. Under a drop-in leakage-free protocol, every method whose inputs leak loses up to 17% of its NDCG@10, the advantage of past labels over the interaction stream nearly vanishes or reverses, and both the best configuration of the state of the art and the rankings change; a blend of training-free long-memory statistics, with weights fit on validation data, matches or exceeds the state of the art under both protocols. Point-in-time correctness should therefore be built into benchmarks, and our tools carry over to other benchmarks whose labels aggregate event streams over time windows.",
+        "authors": [
+          "Yuhang Wang",
+          "Dongmei Li",
+          "Yuze Sun",
+          "Xiaolong Qu",
+          "Yanxiang Wang",
+          "Lei Yao"
+        ],
+        "categories": [
+          "cs.LG"
+        ],
+        "published": "2026-11-23T08:44:40Z",
+        "url": "https://arxiv.org/abs/2611.30289",
+        "pdf_url": "https://arxiv.org/pdf/2611.30289"
+      },
+      "lexical_score": 16.526,
+      "review": {
+        "score": 7,
+        "title_translated": "时间泄漏扭曲了 TGB 节点亲和性排行榜：一项时点审计",
+        "tldr": "论文审计 Temporal Graph Benchmark 节点亲和性预测任务中的时间泄漏问题，发现四个数据集及其评估循环均不满足时点正确性，并提出无泄漏协议重新评估排行榜。",
+        "method": "借鉴 as-of join 与双时态数据库思想，区分标签的查询时间与可用时间，用模型无关工具审计四个 TGB 节点亲和性数据集及评估循环，并在无泄漏协议下重跑对比。",
+        "findings": "四个数据集均不满足时点正确性；在无泄漏协议下，输入泄漏的方法 NDCG@10 最多下降 17%，过去标签相对交互流的优势几乎消失或反转，最优配置与排名均发生变化；一种用验证集拟合权重的免训练长记忆统计混合方法在两种协议下均达到或超过当前最优。",
+        "why_relevant": "论文直击时序图学习基准的评测方法与数据泄漏问题，与研究者对时序图神经网络及基准、数据集质量的关注高度契合。",
+        "tags": [
+          "时序图基准",
+          "评测泄漏",
+          "节点亲和性预测",
+          "可复现性"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.29932",
+        "title": "LODESTONE: Linking System Events to Threat Intelligence for Evidence-Grounded Cyber Attack Investigation",
+        "abstract": "System provenance graphs help reconstruct attacks through causal dependencies, but these connections alone do not explain how events accomplish an adversary's goal. Cyber threat intelligence (CTI) provides the necessary security knowledge, yet linking it to execution evidence requires bridging differences in meaning and granularity between events and attack relations amid scarce labels and sparse relevant evidence. We present LODESTONE, a cross-graph alignment system that links observed system events to CTI attack relations to support evidence-grounded attack reports. LODESTONE uses a novel CTI-driven training-data engine and an expert-verified benchmark of edge-level correspondences and reference attack reports. The engine pairs real CTI knowledge graphs with provenance graphs from isolated executions. A large language model (LLM) agent recursively improves correspondences by checking execution evidence and repairing retrieval, parsing, and reproduction failures; experts independently verify benchmark correspondences. LODESTONE combines text cross-encoder and directed-graph relevance scores to extract compact alert-centered subgraphs, retrieves article-level knowledge graphs through node- and edge-level dual-softmax assignment, and uses a fine-tuned 4B-parameter LLM to align event combinations with CTI attack steps. We evaluate LODESTONE on 27 expert-verified attack cases amid continuous benign activity from real applications, using 713 CTI articles. LLM judgments aligned with multiple human experts yield an attack-step description score of 82%, and attack identification reaches 91%, versus 73% and 32% using the same generator with provenance alone. Baseline pipelines and coding agents achieve description scores of at most 57%. Human-verified correspondences further demonstrate advantages in balancing attack-edge coverage with subgraph size, CTI retrieval, and cross-graph alignment.",
+        "authors": [
+          "Liangyi Huang",
+          "Zichen Liu",
+          "Fei Shao",
+          "Xusheng Xiao"
+        ],
+        "categories": [
+          "cs.CR"
+        ],
+        "published": "2026-11-23T02:46:44Z",
+        "url": "https://arxiv.org/abs/2611.29932",
+        "pdf_url": "https://arxiv.org/pdf/2611.29932"
+      },
+      "lexical_score": 20.767,
+      "review": {
+        "score": 6,
+        "title_translated": "LODESTONE：将系统事件关联到威胁情报以实现有证据支撑的网络攻击调查",
+        "tldr": "LODESTONE 通过对齐跨图（系统溯源图与 CTI 知识图谱），把观测到的系统事件链接到威胁情报中的攻击关系，从而生成有证据支撑的攻击报告。",
+        "method": "构建由 CTI 驱动的训练数据引擎，将真实威胁情报知识图谱与孤立执行产生的溯源图配对；用 LLM agent 递归校验执行证据并修复检索、解析与复现失败；再结合文本 cross-encoder 与有向图相关性打分提取以告警为中心的子图，用节点级与边级 dual-softmax 检索文章级知识图谱，并用微调的 4B 参数 LLM 将事件组合对齐到 CTI 攻击步骤。",
+        "findings": "在 27 个专家验证的攻击案例与 713 篇 CTI 文章上，攻击步骤描述得分 82%、攻击识别 91%，而同一生成器仅用溯源图时为 73% 和 32%；基线流水线与编码 agent 的描述得分最高 57%。",
+        "why_relevant": "该工作面向溯源图的攻击调查，关注事件与安全语义的对齐及基准构建，与该研究者的溯源图 APT 检测和评测方法兴趣相邻，但采用 LLM 与跨图对齐而非时序图神经网络。",
+        "tags": [
+          "溯源图",
+          "威胁情报",
+          "攻击调查",
+          "LLM"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.32598",
+        "title": "On the Effectiveness of Resampling for Supervised Graph Anomaly Detection",
+        "abstract": "Class imbalance and scarce anomaly labels motivate oversampling in supervised graph anomaly detection (GAD), but its benefits across detectors and benchmarks remain unclear. In the low-label setting of GADBench, with 20 labelled anomalies and 80 labelled normal nodes, we compare class weighting and up to six oversampling strategies in ten detector configurations from three families: graph neural networks (GNNs), tree ensembles on neighbourhood-aggregated features, and tabular foundation models, on 17 datasets. On the eight datasets with organic anomalies, no strategy has a statistically resolved average gain in any configuration, and which nodes are labelled matters as much as the strategy. On the nine datasets with injected anomalies, Gaussian-noise oversampling (ROSE) gains up to 5.2 AUPRC points in four of the six tree and tabular foundation model configurations, and in all six only on attribute-swap anomalies; in four GNNs its gain is not distinguishable from zero. This gain depends on the injection recipe, which gives swapped nodes an atypical feature norm: it is no longer distinguishable from zero when the swap uses a single random donor or preserves the norm, although most detectors then also stop detecting the swaps. Over the 17 datasets, tuning the tree detectors adds about three points, as much as ROSE, and cuts ROSE's gain by about half or more. With the same source nodes and class weight, sampled graph views are not distinguishable from plain copies of those nodes. We recommend tuning baselines, repeating labelled splits, reporting organic and injected anomalies separately, and checking label-free degree and feature-norm baselines.",
+        "authors": [
+          "Cyril Perosino",
+          "Rino Di Chiara",
+          "Hamida Seba"
+        ],
+        "categories": [
+          "cs.LG"
+        ],
+        "published": "2026-11-24T13:36:12Z",
+        "url": "https://arxiv.org/abs/2611.32598",
+        "pdf_url": "https://arxiv.org/pdf/2611.32598"
+      },
+      "lexical_score": 15.979,
+      "review": {
+        "score": 6,
+        "title_translated": "重采样对监督图异常检测的有效性",
+        "tldr": "在 GADBench 的低标签设置下，系统比较类别加权与多种过采样策略在 17 个数据集、三类检测器上的效果，发现增益多不稳定且依赖异常注入方式。",
+        "method": "在 GADBench 低标签设置（20 个标注异常节点、80 个标注正常节点）中，对 GNN、基于邻域聚合特征的树集成和表格基础模型共十种检测器配置，比较类别加权与最多六种过采样策略，并区分有机异常与注入异常数据集。",
+        "findings": "八个有机异常数据集上所有策略均无统计显著的增益，标注哪些节点与策略同样重要；九个注入异常数据集上 ROSE 在四种树/表格模型配置中最多提升 5.2 AUPRC，但在四种 GNN 中增益与零不可区分，且增益依赖注入配方（单随机供体或保持范数时消失）；调优树检测器约提升三点，与 ROSE 相当并使后者增益减半以上。",
+        "why_relevant": "该文针对图异常检测的标注稀缺与评测问题，提出区分有机/注入异常、重复标注划分与无标签基线检查等建议，与研究者关心的溯源图异常检测评测方法和数据集质量直接相关。",
+        "tags": [
+          "图异常检测",
+          "类别不平衡",
+          "基准评测",
+          "GADBench"
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "2611.30385",
+        "title": "Toward a Scalable and Adaptive Evaluation Measure for Time Series Anomaly Detection",
+        "abstract": "Time Series Anomaly Detection (TSAD) is a fundamental task for time series analytics. Unlike other domains, where anomaly detection mainly focuses on point-based anomalies, TSAD must also handle range-based anomalies. Nevertheless, TSAD methods are commonly evaluated with measures inherited from classification, such as Precision and Recall, which require a threshold, or with threshold-independent ones, such as AUC, which ignore the temporal aspect of anomalies. To address these issues, the Volume Under the Surface (VUS) measure scores detectors across all thresholds and a range of buffer lengths and has been widely adopted. However, VUS has two limitations. First, VUS is computationally expensive, requiring 7 hours and 38 minutes to evaluate 32 detectors on the 870 TSB-AD time series. Second, VUS applies the same buffer lengths to every anomaly and detector, which can yield over-optimistic scores that hinder discrimination between accurate and mediocre detectors. We first introduce FastVUS, which computes VUS exactly and on average 76x faster by (i) computing all buffers in parallel, (ii) pruning irrelevant buffers for the existence reward, (iii) casting the confusion matrix as a single reduced matrix multiplication, (iv) computing VUS for every buffer length in one pass, and (v) discarding non-anomalous regions with a global mask. We also develop FastVUS-GPU, which recasts every step as batched tensor operations and reaches an average 304x speedup with a maximum error of $5\\times10^{-3}$. Building on FastVUS, we introduce AutoVUS, an adaptive extension that compares each detection against a random baseline and selects the buffer length that maximizes the gain over it. Our case studies show that AutoVUS reduces over-optimistic scores and better separates accurate from mediocre detectors. We release FastVUS and AutoVUS as open source to promote time-aware evaluation at scale.",
+        "authors": [
+          "Emmanouil Sylligardos",
+          "Mingyi Huang",
+          "John Paparrizos",
+          "Pierre Senellart",
+          "Paul Boniol"
+        ],
+        "categories": [
+          "cs.DB",
+          "cs.LG"
+        ],
+        "published": "2026-11-23T09:46:50Z",
+        "url": "https://arxiv.org/abs/2611.30385",
+        "pdf_url": "https://arxiv.org/pdf/2611.30385"
+      },
+      "lexical_score": 14.282,
+      "review": {
+        "score": 6,
+        "title_translated": "面向时间序列异常检测的可扩展自适应评估度量",
+        "tldr": "本文提出 FastVUS 和 FastVUS-GPU 加速 VUS 评估，并提出自适应扩展 AutoVUS，以减少过度乐观的评分，更好地区分准确与平庸的检测器。",
+        "method": "FastVUS 通过并行计算所有 buffer、剪枝对存在性奖励无关的 buffer、将混淆矩阵化为单次归约矩阵乘法、一次遍历计算所有 buffer 长度的 VUS、用全局掩码丢弃非异常区域来精确计算 VUS；FastVUS-GPU 将各步骤改写为批量张量运算；AutoVUS 将每次检测与随机基线比较，选择增益最大的 buffer 长度。",
+        "findings": "FastVUS 平均加速 76 倍，FastVUS-GPU 平均加速 304 倍、最大误差 5×10^-3；案例研究表明 AutoVUS 降低了过度乐观的评分，并更好地将准确检测器与平庸检测器分开。",
+        "why_relevant": "该工作关注时序异常检测的评测方法与基准质量，与研究者对日志异常检测及评测、数据集质量的兴趣相邻，但不涉及溯源图或时序图神经网络。",
+        "tags": [
+          "时间序列异常检测",
+          "评测度量",
+          "VUS",
+          "基准"
+        ]
+      }
+    }
+  ]
+}
