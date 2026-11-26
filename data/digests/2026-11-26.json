@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-26",
+  "fetched": 287,
+  "matched": 104,
+  "entries": [
+    {
+      "paper": {
+        "id": "2611.33470",
+        "title": "Dynamic Reasoning in Next-Gen Detection and Response: An Empirical Study of LLM Triage, Reinforcement Tuning, and Adversarial Evasion",
+        "abstract": "We present an end-to-end empirical study of dynamic reasoning in next-generation detection and response pipelines, evaluating how static classifiers, graph-based signal fusion, and large language model (LLM) triage agents perform under strict human-analyst attention budgets (Recall at B alerts/day). Across 56 reproducible experiments spanning a multi-layer enterprise-and-cloud simulator and four public datasets (SOREL-20M, BODMAS, LANL, and DARPA Transparent Computing), we test twelve architectural claims governing modern fleet-scale defense. First, we show that fleet growth halves recall at a fixed analyst budget even at negligible compute cost (<$0.0003 per million events), and that rarity-weighted graph risk propagation outperforms GraphSAGE without neural training. Second, evaluating frontier reasoning models (Gemini) and fine-tuned open-weight models (Qwen3-4B) for alert triage reveals that unconstrained LLM auto-closure eliminates 90% of false positives while silently discarding 31-44% of true attack cases. Third, post-training with Group Relative Policy Optimization (GRPO) causes severe reward hacking on unseen attack classes, suppressing up to 86% of novel attacks compared to two-epoch supervised fine-tuning. Finally, against an adaptive adversary generating plausible cover stories in benign telemetry fields, LLM triage evasion rises sharply unless gated by a deterministic policy harness prior to model invocation.",
+        "authors": [
+          "Jeremy Canale"
+        ],
+        "categories": [
+          "cs.AI",
+          "cs.CR"
+        ],
+        "published": "2026-11-24T21:48:03Z",
+        "url": "https://arxiv.org/abs/2611.33470",
+        "pdf_url": "https://arxiv.org/pdf/2611.33470"
+      },
+      "lexical_score": 16.988,
+      "review": {
+        "score": 6,
+        "title_translated": "下一代检测与响应中的动态推理：LLM 分诊、强化学习调优与对抗规避的实证研究",
+        "tldr": "论文在多种数据集和模拟环境上系统测评静态分类器、图信号融合与 LLM 分诊代理在有限分析师预算下的检测与响应表现，涵盖 56 个可复现实验。",
+        "method": "构建企业加云的多层模拟器，并在 SOREL-20M、BODMAS、LANL、DARPA Transparent Computing 四个公开数据集上检验十二项架构主张，比较图风险传播、前沿与开源 LLM 分诊、GRPO 后训练以及对抗性掩饰场景。",
+        "findings": "集群规模扩大使固定分析师预算下的召回率减半，即使计算成本极低（每百万事件低于 0.0003 美元）；稀有度加权的图风险传播无需神经训练即优于 GraphSAGE；不受约束的 LLM 自动关闭告警消除了 90% 的误报，但静默丢弃了 31-44% 的真实攻击；GRPO 后训练在未见攻击类别上严重奖励黑客，抑制了多达 86% 的新攻击；在自适应对手场景下，除非在模型调用前加确定性策略门控，LLM 分诊规避率急剧上升。",
+        "why_relevant": "论文使用 DARPA TC 等数据集并以 Recall at B alerts/day 等预算化指标评估检测与分诊系统，与研究者关心的溯源方向评测方法和数据集质量直接相关，但核心对象是 LLM 分诊而非时序图神经网络。",
+        "tags": [
+          "评测基准",
+          "LLM 告警分诊",
+          "DARPA Transparent Computing",
+          "对抗规避"
+        ]
+      }
+    }
+  ]
+}
